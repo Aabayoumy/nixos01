@@ -89,7 +89,7 @@
       fd = "fd -Lu";
     };
   };
-  home.file."~/.config/starship.toml".text = ''
+  home.file.".config/starship.toml".text = ''
       format = """\
     [](bg:#030B16 fg:#7DF9AA)\
     [󰀵 ](bg:#7DF9AA fg:#090c0c)\
