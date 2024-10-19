@@ -106,7 +106,7 @@
     """
 
     [directory]
-    format = "[ ﱮ $path ]($style)"
+    format = "[  $path ]($style)"
     style = "fg:#E4E4E4 bg:#3B76F0"
 
     [git_branch]
