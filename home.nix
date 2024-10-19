@@ -88,7 +88,7 @@
       cat = "bat";
       htop = "btm";
       fd = "fd -Lu";
-      cal = "gcal --starting-day=1";
+      cal = "gcal --starting-day=6";
       update = "nix-channel --update && nix-env -u";
       weather = "curl v2.wttr.in";
     };
