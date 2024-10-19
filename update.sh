@@ -4,7 +4,7 @@ set -e
 clear
 pushd /media/data/nixos01 &>/dev/null
 
-if git diff --quiet '*.nix'; then
+if git diff --quiet '*.*'; then
     echo "No changes detected, exiting."
     popd &>/dev/null
     exit 0
