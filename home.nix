@@ -142,6 +142,10 @@
     style = "bg:#1d2230"
     format = '[[ 󱑍 $time ](bg:#1C3A5E fg:#8DFBD2)]($style)'
   '';
+
+  programs.starship.enable = true;
+  programs.starship.enableZshIntegration = true;
+  programs.starship.enableTransience = true;
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 }
