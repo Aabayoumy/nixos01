@@ -22,6 +22,7 @@
   home.packages = with pkgs; [
     cowsay
     starship
+    gcal
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
     # pkgs.hello
@@ -87,6 +88,9 @@
       cat = "bat";
       htop = "btm";
       fd = "fd -Lu";
+      cal = "gcal --starting-day=1";
+      update = "nix-channel --update && nix-env -u";
+      weather = "curl v2.wttr.in";
     };
   };
   home.file.".config/starship.toml".source = ./starship.toml;
