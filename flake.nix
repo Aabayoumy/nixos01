@@ -40,7 +40,7 @@
       nixos01 = lib.nixosSystem {
         inherit system;
         modules = [
-          ./system/configuration.nix
+          (./. + "/profiles" + ("/" + systemSettings.profile) + "/configuration.nix")
           {environment.systemPackages = [alejandra.defaultPackage.${system}];}
         ];
       };
