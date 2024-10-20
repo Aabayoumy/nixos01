@@ -10,14 +10,15 @@
     set-option -g prefix C-a
     bind s send-prefix
     bind C-a last-window
-    set-option -g status-position top
+    set-option -g status-position bottom
+    set -sg escape-time 10
   '';
 in {
   imports = [./theme.nix];
 
   programs.tmux = {
     enable = true;
-    shortcut = "q";
+    shortcut = "a";
     escapeTime = 10;
     # keyMode = "vi";
     terminal = "tmux-256color";
@@ -58,8 +59,8 @@ in {
       # Force true colors
       set-option -ga terminal-overrides ",*:Tc"
 
-      set-option -g mouse on
-      set-option -g focus-events on
+      set-option -g mouse off
+      set-option -g focus-events off
 
       # Stay in same directory when split
       bind % split-window -h -c "#{pane_current_path}"
