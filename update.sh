@@ -12,10 +12,10 @@ fi
 
 echo -e "\e[32m------ Autoformat nix files ------\e[0m"
 alejandra . &>/dev/null  || ( alejandra . ; echo "formatting failed!" && exit 1)
-
-echo -e "\e[32m------ git changes ------\e[0m"
-# Shows your changes
-git diff -U0 '*.nix'
+git add .
+# echo -e "\e[32m------ git changes ------\e[0m"
+# # Shows your changes
+# git diff -U0 '*.nix'
 echo -e "\e[32m------ Rebuild System Settings ------\e[0m"
 sudo nixos-rebuild switch --flake /media/data/nixos01#nixos01 &>nixos-switch.log || (cat nixos-switch.log | grep --color error && exit 1)
 # Get current generation metadata
