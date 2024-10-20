@@ -42,8 +42,8 @@ in {
 
       set-option -g status-right ' #{prefix_highlight} "#{=21:pane_title}" %H:%M %d-%b-%y'
       set-option -g status-left-length 20
-      set-option -g @prefix_highlight_fg '${colors.background}'
-      set-option -g @prefix_highlight_bg '${colors.dominant}'
+      set-option -g @prefix_highlight_fg '#1e1e2e'
+      set-option -g @prefix_highlight_bg '#cdd6f4'
       run-shell '${prefix-highlight}/share/tmux-plugins/prefix-highlight/prefix_highlight.tmux'
 
       # Be faster switching windows
@@ -70,21 +70,21 @@ in {
       bind '"' split-window -v -c "#{pane_current_path}"
 
       # Colorscheme
-      set-option -g status-style 'fg=${colors.dimForeground}, bg=${colors.background}'
+      set-option -g status-style 'fg=#6c7086, bg=#1e1e2e'
 
-      set-option -g window-status-current-style 'fg=${colors.dominant}'
+      set-option -g window-status-current-style 'fg=#cdd6f4'
 
-      set-option -g pane-border-style 'fg=${colors.background}'
-      set-option -g pane-active-border-style 'fg=${colors.dominant}'
+      set-option -g pane-border-style 'fg=#1e1e2e'
+      set-option -g pane-active-border-style 'fg=#cdd6f4'
 
-      set-option -g message-style 'fg=${colors.background}, bg=${colors.dimForeground}'
+      set-option -g message-style 'fg=#1e1e2e, bg=#6c7086'
 
-      set-option -g mode-style    'fg=${colors.background}, bg=${colors.dominant}'
+      set-option -g mode-style    'fg=#1e1e2e, bg=#cdd6f4'
 
-      set-option -g display-panes-active-colour '${colors.dominant}'
-      set-option -g display-panes-colour '${colors.dimForeground}'
+      set-option -g display-panes-active-colour '#cdd6f4'
+      set-option -g display-panes-colour '#6c7086'
 
-      set-option -g clock-mode-colour '${colors.dominant}'
+      set-option -g clock-mode-colour '#cdd6f4'
     '';
   };
 }
