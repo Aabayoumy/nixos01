@@ -39,9 +39,12 @@
   # enable qemu-guest-agentfor proxmox
   services.qemuGuest.enable = true;
 
-  # nfs services
-  services.rpcbind.enable = true;
-  services.nfs.server.enable = true;
+  # Fix nix path
+  nix.nixPath = [
+    "nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos"
+    "nixos-config=$HOME/dotfiles/system/configuration.nix"
+    "/nix/var/nix/profiles/per-user/root/channels"
+  ];
 
   nix.settings.experimental-features = ["nix-command flakes"];
   nix.settings.trusted-users = ["@wheel"];

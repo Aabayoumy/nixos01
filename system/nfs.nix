@@ -8,4 +8,7 @@
     device = "10.0.0.15:/media/data";
     fsType = "nfs";
   };
+  # nfs services
+  services.rpcbind.enable = true;
+  services.nfs.server.enable = true;
 }
