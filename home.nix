@@ -93,6 +93,9 @@
       ignoreDups = true; # Do not enter command lines into the history list if they are duplicates of the previous event.
       extended = true; # Save timestamp into the history file.
     };
+    initExtra = ''
+      fastfetch
+    '';
   };
   home.file = {
     ".config/starship.toml".source = ./starship.toml;
