@@ -26,6 +26,7 @@
       username = "abayoumy"; # username
       name = "Ahmed Bayoumy"; # name/identifier
       email = "abayoumy@outlook.com";
+      wm = "hyprland";
     };
     pkgs-stable = import inputs.nixpkgs-stable {
       system = systemSettings.system;

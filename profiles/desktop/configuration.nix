@@ -1,13 +1,7 @@
-{
-  pkgs,
-  lib,
-  systemSettings,
-  userSettings,
-  ...
-}: {...}: {
+{pkgs, ...}: {
   imports = [
     ../server/configuration.nix
-    (./. + "../../system/wm" + ("/" + userSettings.wm) + "/install.nix") # My window manager
+    (./. + "../../system/wm" + ("/" + userSettings.wm) + ".nix") # My window manager
   ];
   xdg.portal = {
     enable = true;

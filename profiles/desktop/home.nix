@@ -5,7 +5,7 @@
   ...
 }: {
   imports = [
-    ../../user/shells/sh.nix
+    ../server/home.nix
   ];
   # ] ++ (if config.users.users.abayoumy.shell == pkgs.zsh then [ ./shells/zsh.nix ] else []);
 
