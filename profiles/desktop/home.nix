@@ -14,14 +14,8 @@
   home.stateVersion = "24.05";
 
   home.packages = with pkgs; [
-    cowsay
-    starship
-    gcal
-    bat
-    fzf
-    fd
-    eza
-    thefuck
+    kitty
+    firefox
   ];
 
   programs.home-manager.enable = true;
