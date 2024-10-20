@@ -62,7 +62,9 @@
           inherit userSettings;
           inherit inputs;
         };
-        modules = [./home.nix];
+        modules = [
+          (./. + "/profiles" + ("/" + systemSettings.profile) + "/home.nix") # load home.nix from selected PROFILE
+        ];
       };
     };
   };

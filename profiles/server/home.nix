@@ -4,8 +4,8 @@
   ...
 }: {
   imports = [
-    ./shells/tmux.nix
-    ./shells/zsh.nix
+    ../../user/shells/tmux.nix
+    ../../user/shells/zsh.nix
   ];
   # ] ++ (if config.users.users.abayoumy.shell == pkgs.zsh then [ ./shells/zsh.nix ] else []);
 
@@ -34,8 +34,8 @@
   };
 
   home.file = {
-    ".config/starship.toml".source = ./dot/starship.toml;
-    ".config/fastfetch/config.jsonc".source = ./dot/config.jsonc;
+    ".config/starship.toml".source = ../../dot/starship.toml;
+    ".config/fastfetch/config.jsonc".source = ../../dot/config.jsonc;
   };
 
   programs.home-manager.enable = true;
