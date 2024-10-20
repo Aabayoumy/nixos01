@@ -1,22 +1,10 @@
 {
   description = "Flake of ABayoumy";
-  inputs = {
-    nixpkgs.url = "nixpkgs/nixos-24.05";
-    home-manager.url = "github:nix-community/home-manager/release-24.05";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    alejandra.url = "github:kamadorueda/alejandra/3.0.0";
-    alejandra.inputs.nixpkgs.follows = "nixpkgs";
-    # use the following for unstable:
-    # nixpkgs.url = "nixpkgs/nixos-unstable";
 
-    # or any branch you want:
-    # nixpkgs.url = "nixpkgs/{BRANCH-NAME}";
-  };
-
-  outputs = {
+  outputs = inputs @ {
     self,
-    nixpkgs,
     home-manager,
+    nixpkgs,
     alejandra,
     ...
   }: let
@@ -39,5 +27,17 @@
         modules = [./home.nix];
       };
     };
+  };
+  inputs = {
+    nixpkgs.url = "nixpkgs/nixos-24.05";
+    home-manager.url = "github:nix-community/home-manager/release-24.05";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    alejandra.url = "github:kamadorueda/alejandra/3.0.0";
+    alejandra.inputs.nixpkgs.follows = "nixpkgs";
+    # use the following for unstable:
+    # nixpkgs.url = "nixpkgs/nixos-unstable";
+
+    # or any branch you want:
+    # nixpkgs.url = "nixpkgs/{BRANCH-NAME}";
   };
 }
