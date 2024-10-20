@@ -24,6 +24,7 @@
     fzf
     fd
     eza
+    thefuck
   ];
 
   # Home Manager can also manage your environment variables through
@@ -44,6 +45,10 @@
   #
   home.sessionVariables = {
     EDITOR = "micro";
+    ZSH_TMUX_AUTOSTART = "true";
+    ZSH_TMUX_AUTOSTART_ONCE = "true";
+    ZSH_TMUX_AUTOQUIT = "true";
+    ZSH_TMUX_AUTOCONNECT = "true";
   };
 
   programs.zsh = {
@@ -86,12 +91,6 @@
       ignoreDups = true; # Do not enter command lines into the history list if they are duplicates of the previous event.
       extended = true; # Save timestamp into the history file.
     };
-    initExtra = ''
-      ZSH_TMUX_AUTOSTART=false
-      ZSH_TMUX_AUTOSTART_ONCE=true
-      ZSH_TMUX_AUTOQUIT=true
-      ZSH_TMUX_AUTOCONNECT=true
-    '';
   };
   home.file = {
     ".config/starship.toml".source = ./starship.toml;
