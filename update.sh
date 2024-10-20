@@ -1,7 +1,6 @@
 #!/bin/sh
 ## https://gist.github.com/0atman/1a5133b842f929ba4c1e195ee67599d5
 set -e
-clear
 pushd /media/data/nixos01 &>/dev/null
 
 if git diff --quiet '*.*'; then
