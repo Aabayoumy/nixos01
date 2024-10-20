@@ -46,6 +46,11 @@
     "/nix/var/nix/profiles/per-user/root/channels"
   ];
 
+  # Ensure nix flakes are enabled
+  nix.package = pkgs.nixFlakes;
+  nix.extraOptions = ''
+    experimental-features = nix-command flakes
+  '';
   nix.settings.experimental-features = ["nix-command flakes"];
   nix.settings.trusted-users = ["@wheel"];
   networking.hostName = systemSettings.hostname;
