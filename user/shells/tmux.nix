@@ -14,9 +14,9 @@
     set -sg escape-time 10
   '';
 in {
-  imports = [
-    ./theme.nix
-  ];
+  # imports = [
+  #   ./theme.nix
+  # ];
 
   programs.tmux = {
     enable = true;
