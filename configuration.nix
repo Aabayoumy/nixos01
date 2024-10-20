@@ -100,6 +100,8 @@
     wget
     zsh
     micro
+    fastfetch
+    btop
   ];
 
   # networking.hostName = "nixos"; # Define your hostname.

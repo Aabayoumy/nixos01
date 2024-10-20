@@ -25,7 +25,6 @@
     fd
     eza
     thefuck
-    fastfetch
   ];
 
   # Home Manager can also manage your environment variables through
