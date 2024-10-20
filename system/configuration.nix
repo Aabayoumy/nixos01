@@ -15,9 +15,23 @@
     ./nfs.nix
   ];
 
-  # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  # Bootloader
+  # Use systemd-boot if uefi, default to grub otherwise
+  boot.loader.systemd-boot.enable =
+    if (systemSettings.bootMode == "uefi")
+    then true
+    else false;
+  boot.loader.efi.canTouchEfiVariables =
+    if (systemSettings.bootMode == "uefi")
+    then true
+    else false;
+  boot.loader.efi.efiSysMountPoint = systemSettings.bootMountPath; # does nothing if running bios rather than uefi
+  boot.loader.grub.enable =
+    if (systemSettings.bootMode == "uefi")
+    then false
+    else true;
+  boot.loader.grub.device = systemSettings.grubDevice; # does nothing if running uefi rather than bios
+
   # btrfs Scrub
   services.btrfs.autoScrub.enable = true;
   services.btrfs.autoScrub.interval = "weekly";
