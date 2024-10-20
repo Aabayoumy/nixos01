@@ -47,5 +47,8 @@
       fastfetch
     '';
   };
+
+  programs.fastfetch.enable = true;
+  programs.starship.enable = true;
   programs.starship.enableZshIntegration = true;
 }

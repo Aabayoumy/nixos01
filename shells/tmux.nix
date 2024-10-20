@@ -62,7 +62,7 @@ in {
       # Force true colors
       set-option -ga terminal-overrides ",*:Tc"
 
-      set-option -g mouse off
+      set-option -g mouse on
       set-option -g focus-events off
 
       # Stay in same directory when split
