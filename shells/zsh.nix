@@ -44,6 +44,7 @@
       extended = true; # Save timestamp into the history file.
     };
     initExtra = ''
+      clear
       fastfetch
     '';
   };
