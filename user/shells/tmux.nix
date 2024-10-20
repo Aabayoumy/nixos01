@@ -34,7 +34,6 @@ in {
       run-shell '${sensible}/share/tmux-plugins/sensible/sensible.tmux'
       run-shell '${urlview}/share/tmux-plugins/urlview/urlview.tmux'
       run-shell 'git clone https://github.com/catppuccin/tmux.git ~/.config/tmux/plugins/catppuccin/tmux'
-      run-shell ~/.config/tmux/plugins/catppuccin/tmux/catppuccin.tmux
 
       set -g @catppuccin_window_status_style "rounded"
       set -g @catppuccin_window_number_position "right"
@@ -51,9 +50,7 @@ in {
       set -g @catppuccin_status_connect_separator "no"
 
       set -g @catppuccin_directory_text "#{pane_current_path}"
-
-      # Run catppuccin plugin manually or through tpm
-      # ...
+      run-shell ~/.config/tmux/plugins/catppuccin/tmux/catppuccin.tmux
 
       set -g status-left ""
       set -g  status-right "#{E:@catppuccin_status_directory}"
