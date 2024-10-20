@@ -11,11 +11,10 @@
     bind s send-prefix
     bind C-a last-window
     set-option -g status-position bottom
-    set -sg escape-time 10
+    set -sg escape-time 50
   '';
 in {
   # imports = [
-  #   ./theme.nix
   # ];
 
   programs.tmux = {
