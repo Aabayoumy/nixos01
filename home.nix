@@ -87,7 +87,9 @@
       extended = true; # Save timestamp into the history file.
     };
     initExtra = ''
-      ZSH_TMUX_AUTOQUIT = true
+      ZSH_TMUX_AUTOSTART=false
+      ZSH_TMUX_AUTOSTART_ONCE=true
+      ZSH_TMUX_AUTOQUIT=true
       ZSH_TMUX_AUTOCONNECT=true
     '';
   };
