@@ -3,10 +3,24 @@
 set -e
 pushd /media/data/nixos01 &>/dev/null
 
+force_flag=false
+
+# Check for -f argument
+while getopts 'f' flag; do
+  case "${flag}" in
+    f) force_flag=true ;;
+    *) exit 1 ;;
+  esac
+done
+
 if git diff --quiet '*.*'; then
-    echo "No changes detected, exiting."
-    popd &>/dev/null
-    exit 0
+    if [ "$force_flag" = true ]; then
+        echo "No changes detected, but -f flag is set. Proceeding..."
+    else
+        echo "No changes detected, exiting."
+        popd &>/dev/null
+        exit 0
+    fi
 fi
 
 echo -e "\e[32m------ Autoformat nix files ------\e[0m"
