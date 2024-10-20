@@ -52,10 +52,10 @@ in {
       set -g @catppuccin_directory_text "#{pane_current_path}"
       run-shell ~/.config/tmux/plugins/catppuccin/tmux/catppuccin.tmux
 
-      # set -g status-left ""
-      # set -g  status-right "#{E:@catppuccin_status_directory}"
-      # set -ag status-right "#{E:@catppuccin_status_user}"
-      # set -ag status-right "#{E:@catppuccin_status_host}"
+      set -g status-left ""
+      set -g  status-right "#{E:@catppuccin_status_directory}"
+      set -ag status-right "#{E:@catppuccin_status_user}"
+      set -ag status-right "#{E:@catppuccin_status_host}"
       # set -ag status-right "#{E:@catppuccin_status_session}"
       bind-key R run-shell ' \
         tmux source-file /etc/tmux.conf > /dev/null; \
