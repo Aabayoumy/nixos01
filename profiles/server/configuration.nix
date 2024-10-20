@@ -3,14 +3,12 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 {...}: {
   imports = [
-    ../../system/configuration.nix # Personal is essentially work system + games
-    # ../../system/hardware-configuration.nix
-    # ../../system/app/gamemode.nix
-    # ../../system/app/steam.nix
-    # ../../system/app/prismlauncher.nix
-    # ../../system/security/doas.nix
-    # ../../system/security/gpg.nix
-    # ../../system/security/blocklist.nix
-    # ../../system/security/firewall.nix
+    ../../system/configuration.nix
+  ];
+  # Fix nix path
+  nix.nixPath = [
+    "nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos"
+    "nixos-config=$HOME/dotfiles/system/configuration.nix"
+    "/nix/var/nix/profiles/per-user/root/channels"
   ];
 }
