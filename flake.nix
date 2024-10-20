@@ -8,7 +8,6 @@
     alejandra,
     ...
   }: let
-    system = "x86_64-linux";
     lib = nixpkgs.lib;
     pkgs = nixpkgs.legacyPackages.${"x86_64-linux"};
     # ---- SYSTEM SETTINGS ---- #
@@ -35,6 +34,7 @@
         allowUnfreePredicate = _: true;
       };
     };
+    system = systemSettings.system;
   in {
     nixosConfigurations = {
       nixos01 = lib.nixosSystem {
