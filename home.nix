@@ -49,6 +49,7 @@
     ZSH_TMUX_AUTOSTART_ONCE = "true";
     ZSH_TMUX_AUTOQUIT = "true";
     ZSH_TMUX_AUTOCONNECT = "true";
+    ZSH_TMUX_AUTONAME_SESSION = "abayoumy";
   };
 
   programs.zsh = {
