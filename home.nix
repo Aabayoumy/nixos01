@@ -47,7 +47,7 @@
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
     enableCompletion = true;
-    prezto.tmux.autoStartRemote = true;
+    # prezto.tmux.autoStartRemote = true;
     shellAliases = {
       ls = "eza --header --icons --classify";
       ll = "eza --icons -l -T -L=1";
