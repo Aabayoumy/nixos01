@@ -12,6 +12,7 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    ./nfs.nix
   ];
 
   # Use the systemd-boot EFI boot loader.
@@ -54,10 +55,6 @@
   users.defaultUserShell = pkgs.zsh;
   programs.zsh.enable = true;
   fonts.fontDir.enable = true;
-  systemd.tmpfiles.rules = [
-    "d /media 0755 root root 10d"
-    "d /media/data 0755 abayoumy abayoumy 10d"
-  ];
 
   services.openssh = {
     enable = true;

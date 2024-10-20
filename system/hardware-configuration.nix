@@ -47,11 +47,6 @@
     options = ["subvol=@log"];
   };
 
-  fileSystems."/media/data" = {
-    device = "10.0.0.15:/media/data";
-    fsType = "nfs";
-  };
-
   swapDevices = [];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
