@@ -36,6 +36,7 @@ in {
       run-shell 'git clone https://github.com/dreamsofcode-io/catppuccin-tmux.git ~/.tmux/plugins/catppuccin-tmux'
       run-shell 'source ~/.tmux/plugins/catppuccin-tmux/catppuccin-mocha.tmuxtheme'
 
+      set -g @catppuccin_flavour 'mocha'
       bind-key R run-shell ' \
         tmux source-file /etc/tmux.conf > /dev/null; \
         tmux display-message "sourced /etc/tmux.conf"'
