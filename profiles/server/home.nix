@@ -1,16 +1,16 @@
 {
   config,
   pkgs,
+  userSettings,
   ...
 }: {
   imports = [
-    ../../user/shells/tmux.nix
-    ../../user/shells/zsh.nix
+    ../../user/shells/sh.nix
   ];
   # ] ++ (if config.users.users.abayoumy.shell == pkgs.zsh then [ ./shells/zsh.nix ] else []);
 
-  home.username = "abayoumy";
-  home.homeDirectory = "/home/abayoumy";
+  home.username = userSettings.username;
+  home.homeDirectory = "/home/" + userSettings.username;
   home.stateVersion = "24.05";
 
   home.packages = with pkgs; [
@@ -23,20 +23,6 @@
     eza
     thefuck
   ];
-
-  home.sessionVariables = {
-    EDITOR = "micro";
-    ZSH_TMUX_AUTOSTART = "true";
-    ZSH_TMUX_AUTOSTART_ONCE = "true";
-    ZSH_TMUX_AUTOQUIT = "true";
-    ZSH_TMUX_AUTOCONNECT = "true";
-    ZSH_TMUX_AUTONAME_SESSION = "abayoumy";
-  };
-
-  home.file = {
-    ".config/starship.toml".source = ../../dot/starship.toml;
-    ".config/fastfetch/config.jsonc".source = ../../dot/config.jsonc;
-  };
 
   programs.home-manager.enable = true;
 }
