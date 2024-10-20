@@ -72,7 +72,7 @@
       PermitRootLogin = "prohibit-password";
     };
   };
-
+  services.timesyncd.enable = true;
   security.sudo.wheelNeedsPassword = false;
 
   # Timezone and locale
