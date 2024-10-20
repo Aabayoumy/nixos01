@@ -39,6 +39,13 @@
     nixosConfigurations = {
       nixos01 = lib.nixosSystem {
         inherit system;
+        specialArgs = {
+          # pass config variables from above
+          inherit pkgs-stable;
+          inherit systemSettings;
+          inherit userSettings;
+          inherit inputs;
+        };
         modules = [
           (./. + "/profiles" + ("/" + systemSettings.profile) + "/configuration.nix")
           {environment.systemPackages = [alejandra.defaultPackage.${system}];}

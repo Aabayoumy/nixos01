@@ -5,6 +5,8 @@
   config,
   lib,
   pkgs,
+  systemSettings,
+  userSettings,
   ...
 }: {
   imports = [
@@ -27,16 +29,13 @@
   services.nfs.server.enable = true;
 
   nix.settings.experimental-features = ["nix-command flakes"];
-  nix.settings.trusted-users = ["root" "abayoumy"];
+  nix.settings.trusted-users = ["@wheel"];
   networking.hostName = "nixos01"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
 
-  # Set your time zone.
-  time.timeZone = "Africa/Cairo";
-
-  users.users.abayoumy = {
+  users.users.${userSettings.username} = {
     initialHashedPassword = "$y$j9T$qj80DuYYxYzBAl2RC4MV71$bkTMN5s0WIlMzYBcI2DQdzNdMxnu6eMKnLhdOhUjqlA";
     isNormalUser = true;
     description = "Ahmed Bayoumy";
@@ -56,6 +55,7 @@
   environment.shells = with pkgs; [zsh];
   users.defaultUserShell = pkgs.zsh;
   programs.zsh.enable = true;
+  fonts.fontDir.enable = true;
   systemd.tmpfiles.rules = [
     "d /media 0755 root root 10d"
     "d /media/data 0755 abayoumy abayoumy 10d"
@@ -75,17 +75,19 @@
 
   security.sudo.wheelNeedsPassword = false;
 
-  i18n.defaultLocale = "en_US.UTF-8";
+  # Timezone and locale
+  time.timeZone = systemSettings.timezone; # time zone
+  i18n.defaultLocale = systemSettings.locale;
   i18n.extraLocaleSettings = {
-    LC_ADDRESS = "en_US.UTF-8";
-    LC_IDENTIFICATION = "en_US.UTF-8";
-    LC_MEASUREMENT = "en_US.UTF-8";
-    LC_MONETARY = "en_US.UTF-8";
-    LC_NAME = "en_US.UTF-8";
-    LC_NUMERIC = "en_US.UTF-8";
-    LC_PAPER = "en_US.UTF-8";
-    LC_TELEPHONE = "en_US.UTF-8";
-    LC_TIME = "en_US.UTF-8";
+    LC_ADDRESS = systemSettings.locale;
+    LC_IDENTIFICATION = systemSettings.locale;
+    LC_MEASUREMENT = systemSettings.locale;
+    LC_MONETARY = systemSettings.locale;
+    LC_NAME = systemSettings.locale;
+    LC_NUMERIC = systemSettings.locale;
+    LC_PAPER = systemSettings.locale;
+    LC_TELEPHONE = systemSettings.locale;
+    LC_TIME = systemSettings.locale;
   };
 
   # Configure keymap in X11
