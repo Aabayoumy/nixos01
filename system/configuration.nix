@@ -53,6 +53,9 @@
   '';
   nix.settings.experimental-features = ["nix-command flakes"];
   nix.settings.trusted-users = ["@wheel"];
+  # I'm sorry Stallman-taichou
+  nixpkgs.config.allowUnfree = true;
+
   networking.hostName = systemSettings.hostname;
   networking.networkmanager.enable = true;
 
@@ -122,6 +125,8 @@
     fastfetch
     btop
     aria2
+    cryptsetup
+    home-manager
   ];
   system.stateVersion = "24.05"; # Did you read the comment?
 }
