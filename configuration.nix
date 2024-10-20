@@ -102,6 +102,7 @@
     micro
     fastfetch
     btop
+    aria2
   ];
 
   # networking.hostName = "nixos"; # Define your hostname.

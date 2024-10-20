@@ -98,6 +98,7 @@
   };
   home.file = {
     ".config/starship.toml".source = ./starship.toml;
+    ".config/fastfetch/config.jsonc".source = ./config.jsonc;
 
     # ".screenrc".source = dotfiles/screenrc;
 
