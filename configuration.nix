@@ -100,7 +100,6 @@
     wget
     zsh
     micro
-    fastfetch
   ];
 
   # networking.hostName = "nixos"; # Define your hostname.

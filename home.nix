@@ -25,6 +25,7 @@
     fd
     eza
     thefuck
+    fastfetch
   ];
 
   # Home Manager can also manage your environment variables through
@@ -104,7 +105,7 @@
     #   org.gradle.daemon.idletimeout=3600000
     # '';
   };
-
+  programs.fastfetch.enable = true;
   programs.starship.enable = true;
   programs.starship.enableZshIntegration = true;
   programs.starship.enableTransience = true;
