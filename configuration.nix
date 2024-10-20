@@ -99,13 +99,8 @@
     git
     wget
     zsh
-    fzf
-    grc
     micro
     fastfetch
-    bat
-    fd
-    eza
   ];
 
   # networking.hostName = "nixos"; # Define your hostname.

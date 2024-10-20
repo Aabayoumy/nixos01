@@ -20,6 +20,7 @@ in {
     enable = true;
     shortcut = "a";
     escapeTime = 10;
+    baseIndex = 1;
     # keyMode = "vi";
     terminal = "tmux-256color";
     historyLimit = 50000;
