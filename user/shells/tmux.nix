@@ -15,7 +15,7 @@
   '';
 in {
   imports = [
-    ../../system/theme.nix
+    ./theme.nix
   ];
 
   programs.tmux = {
