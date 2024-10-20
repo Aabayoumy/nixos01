@@ -33,10 +33,9 @@ in {
       run-shell '${copycat}/share/tmux-plugins/copycat/copycat.tmux'
       run-shell '${sensible}/share/tmux-plugins/sensible/sensible.tmux'
       run-shell '${urlview}/share/tmux-plugins/urlview/urlview.tmux'
-      run-shell 'git clone https://github.com/dreamsofcode-io/catppuccin-tmux.git ~/.tmux/plugins/catppuccin-tmux'
-      run-shell 'source ~/.tmux/plugins/catppuccin-tmux/catppuccin-mocha.tmuxtheme'
+      run-shell 'git clone https://github.com/catppuccin/tmux.git ~/.tmux/plugins/catppuccin-tmux'
+      run-shell 'tmux source-file ~/.tmux/plugins/catppuccin-tmux/catppuccin-mocha.tmuxtheme'
 
-      set -g @catppuccin_flavour 'mocha'
       bind-key R run-shell ' \
         tmux source-file /etc/tmux.conf > /dev/null; \
         tmux display-message "sourced /etc/tmux.conf"'
