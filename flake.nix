@@ -23,6 +23,11 @@
       grubDevice = ""; # device identifier for grub; only used for legacy (bios) boot mode
       gpuType = "amd"; # amd, intel or nvidia; only makes some slight mods for amd at the moment
     };
+    userSettings = rec {
+      username = "abayoumy"; # username
+      name = "Ahmed Bayoumy"; # name/identifier
+      email = "abayoumy@outlook.com";
+    };
     pkgs-stable = import inputs.nixpkgs-stable {
       system = systemSettings.system;
       config = {
@@ -43,6 +48,13 @@
     homeConfigurations = {
       abayoumy = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
+        extraSpecialArgs = {
+          # pass config variables from above
+          inherit pkgs-stable;
+          inherit systemSettings;
+          inherit userSettings;
+          inherit inputs;
+        };
         modules = [./home.nix];
       };
     };
