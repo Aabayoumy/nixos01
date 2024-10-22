@@ -11,7 +11,7 @@
 }: {
   imports = [
     # Include the results of the hardware scan.
-    /mnt/etc/nixos/hardware-configuration.nix
+    ./hardware-configuration.nix
     ./nfs.nix
   ];
 
@@ -64,7 +64,6 @@
   networking.firewall.allowedTCPPorts = [ 22 ];
 
   users.users.${userSettings.username} = {
-    initialHashedPassword = "$y$j9T$qj80DuYYxYzBAl2RC4MV71$bkTMN5s0WIlMzYBcI2DQdzNdMxnu6eMKnLhdOhUjqlA";
     isNormalUser = true;
     description = "Ahmed Bayoumy";
     shell = pkgs.zsh;
