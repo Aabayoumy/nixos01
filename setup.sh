@@ -39,7 +39,6 @@ mount -o umask=077 /dev/disk/by-label/boot /mnt/boot
 
 nixos-generate-config --root /mnt
 
-nix-shell -p git
 git clone https://github.com/Aabayoumy/nixos01.git $HOME/.dotfiles
 
 cp /mnt/etc/nixos/hardware-configuration.nix $HOME/.dotfiles/system/
