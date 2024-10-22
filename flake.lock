@@ -629,6 +629,21 @@
         "type": "github"
       }
     },
+    "nwg-dock-hyprland-pin-nixpkgs": {
+      "locked": {
+        "lastModified": 1716385560,
+        "narHash": "sha256-xuFXyvvrDXx5A56uo8D+YmHqsmPscsjBh279P44Z5bE=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "2098d845d76f8a21ae4fe12ed7c7df49098d3f15",
+        "type": "github"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "rev": "2098d845d76f8a21ae4fe12ed7c7df49098d3f15",
+        "type": "indirect"
+      }
+    },
     "root": {
       "inputs": {
         "alejandra": "alejandra",
@@ -640,6 +655,7 @@
         "hyprlock": "hyprlock",
         "nixpkgs": "nixpkgs",
         "nixpkgs-stable": "nixpkgs-stable",
+        "nwg-dock-hyprland-pin-nixpkgs": "nwg-dock-hyprland-pin-nixpkgs",
         "stylix": "stylix"
       }
     },

@@ -16,13 +16,6 @@
 
   home.packages = with pkgs; [
     cowsay
-    starship
-    gcal
-    bat
-    fzf
-    fd
-    eza
-    thefuck
   ];
 
   xdg.enable = true;

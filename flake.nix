@@ -12,7 +12,7 @@
     systemSettings = {
       system = "x86_64-linux"; # system arch
       hostname = "nixos01"; # hostname
-      profile = "desktop"; # select a profile defined from my profiles directory
+      profile = "server"; # select a profile defined from my profiles directory
       timezone = "Africa/Cairo"; # select timezone
       locale = "en_US.UTF-8"; # select locale
       bootMode = "uefi"; # uefi or bios
@@ -29,19 +29,33 @@
         if ((wm == "hyprland") || (wm == "plasma"))
         then "wayland"
         else "x11";
+      theme = "nord";
       browser = "firefox";
+      spawnBrowser =
+        if ((browser == "qutebrowser") && (wm == "hyprland"))
+        then "qutebrowser-hyprprofile"
+        else
+          (
+            if (browser == "qutebrowser")
+            then "qutebrowser --qt-flag enable-gpu-rasterization --qt-flag enable-native-gpu-memory-buffers --qt-flag num-raster-threads=4"
+            else browser
+          ); # Browser spawn command must be specail for qb, since it doesn't gpu accelerate by default (why?)
       term = "kitty"; # Default terminal command;
       font = "Intel One Mono"; # Selected font
       fontPkg = pkgs.intel-one-mono; # Font package
       editor = "micro"; # Default editor;
-      theme = "nord";
+      spawnEditor = editor;
     };
+
     pkgs-stable = import inputs.nixpkgs-stable {
       system = systemSettings.system;
       config = {
         allowUnfree = true;
         allowUnfreePredicate = _: true;
       };
+    };
+    pkgs-nwg-dock-hyprland = import inputs.nwg-dock-hyprland-pin-nixpkgs {
+      system = systemSettings.system;
     };
     pkgs = pkgs-stable;
     lib = inputs.nixpkgs.lib;
@@ -70,6 +84,7 @@
           # pass config variables from above
           inherit pkgs-stable;
           inherit systemSettings;
+          inherit pkgs-nwg-dock-hyprland;
           inherit userSettings;
           inherit inputs;
         };
@@ -106,6 +121,7 @@
       rev = "73b0fc26c0e2f6f82f9d9f5b02e660a958902763";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nwg-dock-hyprland-pin-nixpkgs.url = "nixpkgs/2098d845d76f8a21ae4fe12ed7c7df49098d3f15";
     hyprgrass.url = "github:horriblename/hyprgrass/427690aec574fec75f5b7b800ac4a0b4c8e4b1d5";
     hyprgrass.inputs.hyprland.follows = "hyprland";
     stylix.url = "github:danth/stylix";

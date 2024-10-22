@@ -32,32 +32,36 @@
     else true;
   boot.loader.grub.device = systemSettings.grubDevice; # does nothing if running uefi rather than bios
 
-  # btrfs Scrub
-  services.btrfs.autoScrub.enable = true;
-  services.btrfs.autoScrub.interval = "weekly";
-
   # enable qemu-guest-agentfor proxmox
   services.qemuGuest.enable = true;
+  system.autoUpgrade.enable = true;
 
   # Fix nix path
   nix.nixPath = [
     "nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos"
-    "nixos-config=$HOME/dotfiles/system/configuration.nix"
+    "nixos-config=$HOME/.dotfiles/system/configuration.nix"
     "/nix/var/nix/profiles/per-user/root/channels"
   ];
 
   # Ensure nix flakes are enabled
   nix.package = pkgs.nixFlakes;
-  nix.extraOptions = ''
-    experimental-features = nix-command flakes
-  '';
-  nix.settings.experimental-features = ["nix-command flakes"];
-  nix.settings.trusted-users = ["@wheel"];
+  nix.settings = {
+    auto-optimise-store = true;
+    experimental-features = [ "nix-command" "flakes" "repl-flake" ];
+    trusted-users = ["@wheel"];
+  };
   # I'm sorry Stallman-taichou
   nixpkgs.config.allowUnfree = true;
 
   networking.hostName = systemSettings.hostname;
   networking.networkmanager.enable = true;
+
+  # disable ipv6
+  networking.enableIPv6  = false;
+
+  # Newtwork firwall
+  networking.firewall.enable = true;
+  networking.firewall.allowedTCPPorts = [ 22 ];
 
   users.users.${userSettings.username} = {
     initialHashedPassword = "$y$j9T$qj80DuYYxYzBAl2RC4MV71$bkTMN5s0WIlMzYBcI2DQdzNdMxnu6eMKnLhdOhUjqlA";
@@ -118,16 +122,55 @@
 
   environment.systemPackages = with pkgs; [
     nfs-utils
-    git
-    wget
     zsh
+    fd
+    starship
+    gcal
     micro
     fastfetch
     btop
-    aria2
     cryptsetup
     home-manager
     xdg-user-dirs
+    coreutils
+    curl
+    eza
+    thefuck
+    findutils
+    fzf
+    git
+    gnumake
+    gnutar
+    htop
+    iproute2
+    jq
+    killall
+    less
+    libuuid
+    linuxHeaders
+    mkpasswd
+    netcat
+    nettools
+    nmap
+    openssl
+    python3
+    python3Packages.pip
+    ripgrep
+    rsync
+    spice-vdagent
+    ssh-import-id
+    strace
+    sysstat
+    tealdeer
+    tree
+    tzdata
+    unzip
+    util-linux
+    wget
+    aria2
+    yq
+    zsh-autosuggestions
+    zsh-syntax-highlighting
   ];
   system.stateVersion = "24.05"; # Did you read the comment?
 }

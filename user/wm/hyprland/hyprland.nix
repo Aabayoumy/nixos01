@@ -17,7 +17,7 @@ in {
         dmenu_command = "fuzzel -d";
         inherit config lib pkgs;
       })
-      ../input/nihongo.nix
+      # ../input/nihongo.nix
     ]
     ++ (
       if (systemSettings.profile == "desktop")
