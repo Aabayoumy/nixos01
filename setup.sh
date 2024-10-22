@@ -41,10 +41,7 @@ nixos-generate-config --root /mnt
 
 
 FLAKE="github:Aabayoumy/nixos01#nixos01"
-sudo nix \
-    --extra-experimental-features 'flakes nix-command' \
-    --flake "$FLAKE" \
-    --write-efi-boot-entries
+sudo nixos-install --flake "$FLAKE"
 
 while true; do
     read -p "Do you want to reboot now? (y/n) " yn
