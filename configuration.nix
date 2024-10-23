@@ -19,16 +19,6 @@ boot.loader.systemd-boot.enable = true;
 
   system.autoUpgrade.enable = true;
 
-  # Ensure nix flakes are enabled
-  nix.package = pkgs.nixFlakes;
-  nix.settings = {
-    auto-optimise-store = true;
-    experimental-features = [ "nix-command" "flakes" "repl-flake" ];
-    trusted-users = ["@wheel"];
-  };
-  # I'm sorry Stallman-taichou
-  nixpkgs.config.allowUnfree = true;
-
   networking.hostName = "nixos01";
   networking.networkmanager.enable = true;
 
