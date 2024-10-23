@@ -1,7 +1,7 @@
 #!/bin/sh
 ## https://gist.github.com/0atman/1a5133b842f929ba4c1e195ee67599d5
 set -e
-pushd /media/data/nixos01 &>/dev/null
+pushd $HOME/.dotfiles &>/dev/null
 
 force_flag=false
 
@@ -39,11 +39,11 @@ git add .
 # # Shows your changes
 # git diff -U0 '*.nix'
 echo -e "\e[32m------ Rebuild System Settings ------\e[0m"
-sudo nixos-rebuild switch --flake /media/data/nixos01#nixos01 &>nixos-switch.log || (cat nixos-switch.log | grep --color error && exit 1)
+sudo nixos-rebuild switch --flake .#nixos01 &>nixos-switch.log || (cat nixos-switch.log | grep --color error && exit 1)
 # Get current generation metadata
 current=$(nixos-rebuild list-generations | grep current)
 echo -e "\e[32m------ Rebuild User Settings ------\e[0m"
-nix run home-manager/master -- switch --flake /media/data/nixos01#abayoumy &>>nixos-switch.log || (cat nixos-switch.log | grep --color error && exit 1)
+nix run home-manager/master -- switch --flake .#abayoumy &>>nixos-switch.log || (cat nixos-switch.log | grep --color error && exit 1)
 echo -e "\e[32m------ Operation Completed Successfully ------\e[0m"
 
 # Commit all changes witih the generation metadata
