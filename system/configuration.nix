@@ -47,7 +47,7 @@
   nix.package = pkgs.nixFlakes;
   nix.settings = {
     auto-optimise-store = true;
-    experimental-features = [ "nix-command" "flakes" "repl-flake" ];
+    experimental-features = [ "nix-command" "flakes" ];
     trusted-users = ["@wheel"];
   };
   # I'm sorry Stallman-taichou
