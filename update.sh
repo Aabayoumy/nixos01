@@ -32,11 +32,11 @@ fi
 # # Shows your changes
 # git diff -U0 '*.nix'
 echo -e "\e[32m------ Rebuild System Settings ------\e[0m"
-sudo nixos-rebuild switch --flake .#nixos01 &>nixos-switch.log || (cat nixos-switch.log | grep --color error && exit 1)
+sudo nixos-rebuild switch --flake .#nixos01 &>nixos-switch.log || (cat nixos-switch.log | grep --color error: && exit 1)
 # Get current generation metadata
 current=$(nixos-rebuild list-generations | grep current)
 echo -e "\e[32m------ Rebuild User Settings ------\e[0m"
-nix run home-manager/master -- switch --flake .#abayoumy &>>nixos-switch.log || (cat nixos-switch.log | grep --color error && exit 1)
+nix run home-manager/master -- switch --flake .#abayoumy &>>nixos-switch.log || (cat nixos-switch.log | grep --color error: && exit 1)
 echo -e "\e[32m------ Operation Completed Successfully ------\e[0m"
 
 # Back to where you were
