@@ -22,12 +22,12 @@ done
 # Fetch the latest changes from the remote repository
 git pull origin master --rebase --autostash || exit 1
 
-echo -e "\e[32m------ Autoformat nix files ------\e[0m"
-if command -v alejandra >/dev/null 2>&1; then
-    alejandra . &>/dev/null || (alejandra .; echo "Formatting failed!" && exit 1)
-else
-    echo "Error: alejandra command not found."
-fi
+# echo -e "\e[32m------ Autoformat nix files ------\e[0m"
+# if command -v alejandra >/dev/null 2>&1; then
+#     alejandra . &>/dev/null || (alejandra .; echo "Formatting failed!" && exit 1)
+# else
+#     echo "Error: alejandra command not found."
+# fi
 # echo -e "\e[32m------ git changes ------\e[0m"
 # # Shows your changes
 # git diff -U0 '*.nix'
