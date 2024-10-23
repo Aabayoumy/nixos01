@@ -39,14 +39,36 @@ mount -o umask=077 /dev/disk/by-label/boot /mnt/boot
 
 nixos-generate-config --root /mnt
 
-git clone https://github.com/Aabayoumy/nixos01.git $HOME/.dotfiles
+HASHED_PW_FILE="$HOME/.hashed_pw"
 
-cp /mnt/etc/nixos/hardware-configuration.nix $HOME/.dotfiles/system/
+# Check if the hashed password file exists
+if [ -f "$HASHED_PW_FILE" ]; then
+    # Read the hashed password from the file
+    HASHED_PASSWORD=$(cat "$HASHED_PW_FILE")
+else
+    # Check if $PW is set
+    if [ -z "${PW}" ]; then
+        # Prompt the user for a value
+        read -p "Enter user password: " -sr PW
+        echo
+    fi
 
+    # Generate the hashed password
+    HASHED_PASSWORD=$(mkpasswd "$PW")
+    
 
-FLAKE="github:Aabayoumy/nixos01#nixos01"
+    # Store the hashed password in the file
+    echo "$HASHED_PASSWORD" > "$HASHED_PW_FILE"
+fi
+export HASHED_PASSWORD
 
-sudo nixos-install --flake $HOME/.dotfiles#nixos01
+# download the configuation.nix template
+curl -s "https://raw.githubusercontent.com/Aabayoumy/nixos24.05/refs/heads/main/configuration.nix?$(date +%s)" > configuration.nix
+
+# process the template
+envsubst "${HASHED_PASSWORD}" < configuration.nix > /mnt/etc/nixos/configuration.nix
+
+nixos-install
 
 while true; do
     read -p "Do you want to reboot now? (y/n) " yn

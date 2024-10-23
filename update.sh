@@ -5,6 +5,12 @@ pushd /media/data/nixos01 &>/dev/null
 
 force_flag=false
 
+# check if hardware-configuration.nix exist in system folder
+if [ ! -f ./system/hardware-configuration.nix ]; then
+  cp /etc/nixos/hardware-configuration.nix ./system/
+  exit 1
+fi
+
 # Check for -f argument
 while getopts 'f' flag; do
   case "${flag}" in
