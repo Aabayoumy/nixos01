@@ -8,7 +8,6 @@ force_flag=false
 # check if hardware-configuration.nix exist in system folder
 if [ ! -f ./system/hardware-configuration.nix ]; then
   cp /etc/nixos/hardware-configuration.nix ./system/
-  exit 1
 fi
 
 # Check for -f argument
@@ -30,7 +29,11 @@ if git diff --quiet '*.*'; then
 fi
 
 echo -e "\e[32m------ Autoformat nix files ------\e[0m"
-alejandra . &>/dev/null  || ( alejandra . ; echo "formatting failed!" && exit 1)
+if command -v alejandra >/dev/null 2>&1; then
+    alejandra . &>/dev/null || (alejandra .; echo "Formatting failed!" && exit 1)
+else
+    echo "Error: alejandra command not found."
+fi
 git add .
 # echo -e "\e[32m------ git changes ------\e[0m"
 # # Shows your changes
