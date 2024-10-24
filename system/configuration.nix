@@ -99,12 +99,6 @@
     LC_TIME = systemSettings.locale;
   };
 
-  # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "";
-  };
-
   environment.systemPackages = with pkgs; [
     nfs-utils
     zsh
