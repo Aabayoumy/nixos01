@@ -27,8 +27,8 @@
       enable = true;
         xkb = {
           layout = "us,ara";
-          variant = "digits";
-          options = "grp:alt_shift_toggle,caps:escape";
+          # variant = "digits";
+          # options = "grp:alt_shift_toggle,caps:escape";
         };
 
     };
