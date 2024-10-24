@@ -25,10 +25,11 @@
     };
       xserver = {
       enable = true;
-          layout = "us,ara";
+        xkb = {
+          layout = "us";
           Variant = "digits";
           Options = "grp:alt_shift_toggle,caps:escape";
-
+        };
 
     };
   };
