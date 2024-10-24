@@ -6,11 +6,8 @@
   ];
 
   # Configure X11
-  services.xserver = {
-    enable = true;
-    layout = "us,ara";
-    xkbVariant = "digits";
-    xkbOptions = "grp:alt_shift_toggle,caps:escape";
+  services = { 
+    displayManager.sddm.enable = true;
     displayManager.sddm.settings.General.DisplayServer = "x11-user";
     # displayManager = {
     #   lightdm.enable = true;
@@ -26,7 +23,14 @@
       enable = true;
       touchpad.disableWhileTyping = true;
     };
-  };
-  services.displayManager.sddm.enable = true;
+    xserver = {
+      enable = true;
+        xkb = { 
+          layout = "us,ara";
+          Variant = "digits";
+          Options = "grp:alt_shift_toggle,caps:escape";
+        }
 
+    };
+  }
 }
