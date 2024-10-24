@@ -8,11 +8,10 @@
   # Configure X11
   services.xserver = {
     enable = true;
-    layout = "us";
-    xkbVariant = "";
-    xkbOptions = "caps:escape";
-    excludePackages = [pkgs.xterm];
-    
+    layout = "us,ara";
+    xkbVariant = ",digits";
+    xkbOptions = "grp:alt_shift_toggle,caps:escape";
+    displayManager.sddm.settings.General.DisplayServer = "x11-user";
     # displayManager = {
     #   lightdm.enable = true;
     #   sessionCommands = ''
@@ -24,8 +23,10 @@
     #   '';
     # };
     libinput = {
+      enable = true;
       touchpad.disableWhileTyping = true;
     };
   };
   services.displayManager.sddm.enable = true;
+
 }

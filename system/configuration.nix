@@ -108,6 +108,7 @@
   environment.systemPackages = with pkgs; [
     nfs-utils
     zsh
+    bat
     fd
     starship
     gcal
