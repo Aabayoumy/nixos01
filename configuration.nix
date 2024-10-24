@@ -138,6 +138,13 @@ boot.loader.systemd-boot.enable = true;
     zsh-autosuggestions
     zsh-syntax-highlighting
   ];
+  programs.nh = {
+    enable = true;
+    clean.enable = true;
+    clean.extraArgs = "--keep-since 4d --keep 3";
+    flake = "/home/abayoumy/.dotfiles";
+  };
+
   systemd.tmpfiles.rules = [
     "d /media 0755 root root 10d"
     "d /media/data 0755 abayoumy abayoumy 10d"
