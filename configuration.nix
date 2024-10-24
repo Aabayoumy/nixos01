@@ -13,7 +13,7 @@
   ];
 
   # Bootloader
-boot.loader.systemd-boot.enable = true;
+  boot.loader.systemd-boot.enable = true;
   # enable qemu-guest-agentfor proxmox
   services.qemuGuest.enable = true;
 
