@@ -46,7 +46,7 @@ fi
 
 
 echo -e "\e[32m------ Rebuild System Settings ------\e[0m"
-sudo nixos-rebuild switch --flake .#nixos01 &>nixos-switch.log || (cat nixos-switch.log | grep --color error: && exit 1)
+sudo nixos-rebuild switch --flake .#nixos01 --impure &>nixos-switch.log || (cat nixos-switch.log | grep --color error: && exit 1)
 # Get current generation metadata
 echo -e "\e[32m------ Rebuild User Settings ------\e[0m"
 nix run home-manager/master -- switch --flake .#abayoumy &>>nixos-switch.log || (cat nixos-switch.log | grep --color error: && exit 1)
