@@ -65,7 +65,7 @@
       username = "abayoumy"; # username
       name = "Ahmed Bayoumy"; # name/identifier
       email = "abayoumy@outlook.com";
-      theme = "nord";
+      theme = "Dracula";
       browser = "firefox";
       wm = "kde";
       spawnBrowser = browser ; # Browser spawn command must be specail for qb, since it doesn't gpu accelerate by default (why?)
