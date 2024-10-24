@@ -25,7 +25,6 @@ if command -v alejandra >/dev/null 2>&1; then
 else
     echo "Error: alejandra command not found."
 fi
-echo -e "\e[32m------ git changes ------\e[0m"
 
 # Check if home-manager is installed, and install it if it is not
 if ! command -v home-manager &>/dev/null; then
