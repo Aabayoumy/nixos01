@@ -52,7 +52,7 @@
       system = "x86_64-linux"; # system arch
       hostname = "nixos01"; # hostname
       profile = "desktop"; # select a profile defined from my profiles directory
-      wm = "xmonad";
+      wm = "kde";
       wmType = "x11";
       timezone = "Africa/Cairo"; # select timezone
       locale = "en_US.UTF-8"; # select locale

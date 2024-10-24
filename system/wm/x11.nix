@@ -2,7 +2,6 @@
   imports = [
     ./pipewire.nix
     ./dbus.nix
-    ./gnome-keyring.nix
     ./fonts.nix
   ];
 
@@ -13,6 +12,7 @@
     xkbVariant = "";
     xkbOptions = "caps:escape";
     excludePackages = [pkgs.xterm];
+      services.displayManager.sddm.enable = true;
     # displayManager = {
     #   lightdm.enable = true;
     #   sessionCommands = ''
