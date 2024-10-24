@@ -22,13 +22,6 @@ else
     echo "Error: alejandra command not found."
 fi
 
-# Check if home-manager is installed, and install it if it is not
-if ! command -v home-manager &>/dev/null; then
-  echo -e "\e[32m------ Installing Home Manager ------\e[0m"
-  nix-channel --add nix-channel --add https://github.com/nix-community/home-manager/archive/release-24.05.tar.gz home-manager home-manager
-  nix-channel --update
-  nix-shell '<home-manager>' -A install
-fi
 
 # Initialize flags
 system_rebuild=false
@@ -71,6 +64,13 @@ if [ "$system_rebuild" = true ]; then
 fi
 
 if [ "$user_rebuild" = true ]; then
+# Check if home-manager is installed, and install it if it is not
+  if ! command -v home-manager &>/dev/null; then
+    echo -e "\e[32m------ Installing Home Manager ------\e[0m"
+    nix-channel --add https://github.com/nix-community/home-manager/archive/release-24.05.tar.gz home-manager
+    nix-channel --update
+    nix-shell '<home-manager>' -A install
+  fi
   echo -e "\e[32m------ Rebuild User Settings ------\e[0m"
   nix run home-manager/master -- switch --flake .#abayoumy &>>nixos-switch.log || (cat nixos-switch.log | grep --color error: && exit 1)
   echo -e "\e[32m------ User rebuild completed successfully ------\e[0m"
