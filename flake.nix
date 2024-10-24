@@ -67,7 +67,7 @@
       email = "abayoumy@outlook.com";
       theme = "nord";
       browser = "firefox";
-      wm = systemSettings.wm;
+      wm = "kde";
       spawnBrowser = browser ; # Browser spawn command must be specail for qb, since it doesn't gpu accelerate by default (why?)
       term = "kitty"; # Default terminal command;
       font = "Intel One Mono"; # Selected font
