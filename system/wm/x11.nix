@@ -23,7 +23,7 @@
       enable = true;
       touchpad.disableWhileTyping = true;
     };
-    xserver = {
+xserver = {
       enable = true;
         xkb = { 
           layout = "us,ara";
