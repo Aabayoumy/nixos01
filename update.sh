@@ -5,14 +5,17 @@ pushd $HOME/.dotfiles &>/dev/null
 
 force_flag=false
 
+# Check if the current folder is a Git repository
+if [ -d .git ]; then
 # Fetch the latest changes from the remote repository
 git pull origin master --rebase --autostash || exit 1
+fi
 
 # check if hardware-configuration.nix exist in system folder
-if [ ! -f ./system/hardware-configuration.nix ]; then
-  cp /etc/nixos/hardware-configuration.nix ./system/
-  rm -rf .git 
-fi
+# if [ ! -f ./system/hardware-configuration.nix ]; then
+#   cp /etc/nixos/hardware-configuration.nix ./system/
+#   rm -rf .git 
+# fi
 
 # Check for -f argument
 while getopts 'f' flag; do
@@ -32,6 +35,14 @@ done
 #     echo "Error: alejandra command not found."
 # fi
 # echo -e "\e[32m------ git changes ------\e[0m"
+
+# Check if home-manager is installed, and install it if it is not
+if ! command -v home-manager &>/dev/null; then
+  echo -e "\e[32m------ Installing Home Manager ------\e[0m"
+  nix-channel --add nix-channel --add https://github.com/nix-community/home-manager/archive/release-24.05.tar.gz home-manager home-manager
+  nix-channel --update
+  nix-shell '<home-manager>' -A install
+fi
 
 
 echo -e "\e[32m------ Rebuild System Settings ------\e[0m"
