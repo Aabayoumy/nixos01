@@ -17,8 +17,6 @@ if [ ! -f ./system/hardware-configuration.nix ]; then
   git add .  
 fi
 
-
-
 if command -v alejandra >/dev/null 2>&1; then
   echo -e "\e[32m------ Autoformat nix files ------\e[0m"
     alejandra . &>/dev/null || (alejandra .; echo "Formatting failed!" && exit 1)
@@ -33,6 +31,7 @@ if ! command -v home-manager &>/dev/null; then
   nix-channel --update
   nix-shell '<home-manager>' -A install
 fi
+
 # Initialize flags
 system_rebuild=false
 user_rebuild=false
@@ -62,26 +61,22 @@ while getopts ":hsu" opt; do
       exit 1
       ;;
   esac
+  shift $((OPTIND -1))
 done
-shift $((OPTIND -1))
+
 
 # Your current logic to handle rebuilds
 if [ "$system_rebuild" = true ]; then
   echo -e "\e[32m------ Rebuild System Settings ------\e[0m"
   sudo nixos-rebuild switch --flake .#nixos01 --impure &>nixos-switch.log || (cat nixos-switch.log | grep --color error: && exit 1)
   echo -e "\e[32m------ System rebuild completed successfully ------\e[0m"
-  exit 0
 fi
 
 if [ "$user_rebuild" = true ]; then
   echo -e "\e[32m------ Rebuild User Settings ------\e[0m"
   nix run home-manager/master -- switch --flake .#abayoumy &>>nixos-switch.log || (cat nixos-switch.log | grep --color error: && exit 1)
   echo -e "\e[32m------ User rebuild completed successfully ------\e[0m"
-  exit 0
 fi
-
-# echo -e "\e[32m------ nixos Rebuild  ------\e[0m"
-# sudo nixos-rebuild switch --flake . &>>nixos-switch.log || (cat nixos-switch.log | grep --color error: && exit 1)
 
 # Back to where you were
 popd &>/dev/null
