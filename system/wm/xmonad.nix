@@ -5,7 +5,7 @@
   xmonad-contexts,
   ...
 }: {
-  # Import wayland config
+  # Import x11 config
   imports = [
     ./x11.nix
     ./pipewire.nix

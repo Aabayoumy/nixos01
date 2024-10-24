@@ -47,7 +47,15 @@ in {
     greeters.slick.enable = true;
     greeters.slick.theme.name = myLightDMTheme;
   };
+
+  stylix.targets.sddm.enable = true;
+  services.xserver.displayManager.sddm = {
+    greeters.slick.enable = true;
+    greeters.slick.theme.name = myLightDMTheme;
+  };
+
   stylix.targets.console.enable = true;
+
 
   environment.sessionVariables = {
     QT_QPA_PLATFORMTHEME = "qt5ct";
