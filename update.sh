@@ -18,13 +18,14 @@ if [ ! -f ./system/hardware-configuration.nix ]; then
 fi
 
 
-# echo -e "\e[32m------ Autoformat nix files ------\e[0m"
-# if command -v alejandra >/dev/null 2>&1; then
-#     alejandra . &>/dev/null || (alejandra .; echo "Formatting failed!" && exit 1)
-# else
-#     echo "Error: alejandra command not found."
-# fi
-# echo -e "\e[32m------ git changes ------\e[0m"
+
+if command -v alejandra >/dev/null 2>&1; then
+  echo -e "\e[32m------ Autoformat nix files ------\e[0m"
+    alejandra . &>/dev/null || (alejandra .; echo "Formatting failed!" && exit 1)
+else
+    echo "Error: alejandra command not found."
+fi
+echo -e "\e[32m------ git changes ------\e[0m"
 
 # Check if home-manager is installed, and install it if it is not
 if ! command -v home-manager &>/dev/null; then
@@ -34,13 +35,46 @@ if ! command -v home-manager &>/dev/null; then
   nix-shell '<home-manager>' -A install
 fi
 
+while getopts ":hsu" opt; do
+  case ${opt} in
+    h )
+      echo "Usage:"
+      echo "-h     Display this help message."
+      echo "-s     Run system rebuild only."
+      echo "-u     Run user rebuild only."
+      exit 0
+      ;;
+    s )
+      system_rebuild=true
+      ;;
+    u )
+      user_rebuild=true
+      ;;
+    \? )
+      echo "Invalid option: $OPTARG" 1>&2
+      exit 1
+      ;;
+    : )
+      echo "Invalid option: $OPTARG requires an argument" 1>&2
+      exit 1
+      ;;
+  esac
+done
+shift $((OPTIND -1))
 
-echo -e "\e[32m------ Rebuild System Settings ------\e[0m"
-sudo nixos-rebuild switch --flake .#nixos01 --impure &>nixos-switch.log || (cat nixos-switch.log | grep --color error: && exit 1)
-# Get current generation metadata
-echo -e "\e[32m------ Rebuild User Settings ------\e[0m"
-nix run home-manager/master -- switch --flake .#abayoumy &>>nixos-switch.log || (cat nixos-switch.log | grep --color error: && exit 1)
-echo -e "\e[32m------ Operation Completed Successfully ------\e[0m"
+if [ "$system_rebuild" = true ]; then
+  echo -e "\e[32m------ Rebuild System Settings ------\e[0m"
+  sudo nixos-rebuild switch --flake .#nixos01 --impure &>nixos-switch.log || (cat nixos-switch.log | grep --color error: && exit 1)
+  echo -e "\e[32m------ System rebuild completed successfully ------\e[0m"
+  exit 0
+fi
+
+if [ "$user_rebuild" = true ]; then
+  echo -e "\e[32m------ Rebuild User Settings ------\e[0m"
+  nix run home-manager/master -- switch --flake .#abayoumy &>>nixos-switch.log || (cat nixos-switch.log | grep --color error: && exit 1)
+  echo -e "\e[32m------ User rebuild completed successfully ------\e[0m"
+  exit 0
+fi
 
 # echo -e "\e[32m------ nixos Rebuild  ------\e[0m"
 # sudo nixos-rebuild switch --flake . &>>nixos-switch.log || (cat nixos-switch.log | grep --color error: && exit 1)
