@@ -28,7 +28,8 @@
         xkb = {
           layout = "us,ara";
           Variant = "digits";
-          Options = "grp:alt_shift_toggle,caps:escape";
+          Options = "grp:alt_shift_toggle";
+          # Options = "grp:alt_shift_toggle,caps:escape";
         };
 
     };
