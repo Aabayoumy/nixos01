@@ -1,19 +1,7 @@
 #!/bin/sh
 ## https://gist.github.com/0atman/1a5133b842f929ba4c1e195ee67599d5
 set -e
-pushd $HOME/.dotfiles &>/dev/null
 
-# Check if the current folder is a Git repository
-if [ -d .git ]; then
-# Fetch the latest changes from the remote repository
-git pull origin master --rebase --autostash || exit 1
-fi
-
-# check if hardware-configuration.nix exist in system folder
-if [ ! -f ./system/hardware-configuration.nix ]; then
-  cp /etc/nixos/hardware-configuration.nix ./system/
-  git add .  
-fi
 
 if command -v alejandra >/dev/null 2>&1; then
   echo -e "\e[32m------ Autoformat nix files ------\e[0m"
@@ -76,5 +64,3 @@ if [ "$user_rebuild" = true ]; then
   echo -e "\e[32m------ User rebuild completed successfully ------\e[0m"
 fi
 
-# Back to where you were
-popd &>/dev/null

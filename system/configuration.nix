@@ -33,7 +33,7 @@
   nix.package = pkgs.nixFlakes;
   nix.settings = {
     auto-optimise-store = true;
-    experimental-features = [ "nix-command" "flakes" ];
+    experimental-features = ["nix-command" "flakes"];
     trusted-users = ["@wheel"];
   };
   # I'm sorry Stallman-taichou
@@ -43,11 +43,11 @@
   networking.networkmanager.enable = true;
 
   # disable ipv6
-  networking.enableIPv6  = false;
+  networking.enableIPv6 = false;
 
   # Newtwork firwall
   networking.firewall.enable = true;
-  networking.firewall.allowedTCPPorts = [ 22 ];
+  networking.firewall.allowedTCPPorts = [22];
 
   users.users.${userSettings.username} = {
     isNormalUser = true;

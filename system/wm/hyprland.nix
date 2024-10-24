@@ -70,7 +70,7 @@ in {
       enable = true;
       layout = "us";
       xkbVariant = "";
-      excludePackages = [ pkgs.xterm ];
+      excludePackages = [pkgs.xterm];
       videoDrivers = ["nvidia"];
       libinput.enable = true;
       displayManager.gdm = {
@@ -91,8 +91,6 @@ in {
       enableHidpi = true;
       theme = "chili";
       package = pkgs.sddm;
+    };
   };
-  };
-
-
 }

@@ -1,11 +1,11 @@
 {
   pkgs,
-  userSettings,
+  systemSettings,
   ...
 }: {
   imports = [
     ../server/configuration.nix
-    (./. + "../../../system/wm" + ("/" + userSettings.wm) + ".nix") # My window manager
+    (./. + "../../../system/wm" + ("/" + systemSettings.wm) + ".nix") # My window manager
     ../../system/style/stylix.nix
   ];
   xdg.portal = {
