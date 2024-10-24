@@ -5,9 +5,13 @@ pushd $HOME/.dotfiles &>/dev/null
 
 force_flag=false
 
+# Fetch the latest changes from the remote repository
+git pull origin master --rebase --autostash || exit 1
+
 # check if hardware-configuration.nix exist in system folder
 if [ ! -f ./system/hardware-configuration.nix ]; then
   cp /etc/nixos/hardware-configuration.nix ./system/
+  rm -rf .git 
 fi
 
 # Check for -f argument
@@ -19,8 +23,7 @@ while getopts 'f' flag; do
 done
 
 
-# Fetch the latest changes from the remote repository
-git pull origin master --rebase --autostash || exit 1
+
 
 # echo -e "\e[32m------ Autoformat nix files ------\e[0m"
 # if command -v alejandra >/dev/null 2>&1; then
@@ -29,15 +32,17 @@ git pull origin master --rebase --autostash || exit 1
 #     echo "Error: alejandra command not found."
 # fi
 # echo -e "\e[32m------ git changes ------\e[0m"
-# # Shows your changes
-# git diff -U0 '*.nix'
+
+
 echo -e "\e[32m------ Rebuild System Settings ------\e[0m"
 sudo nixos-rebuild switch --flake .#nixos01 &>nixos-switch.log || (cat nixos-switch.log | grep --color error: && exit 1)
 # Get current generation metadata
-current=$(nixos-rebuild list-generations | grep current)
 echo -e "\e[32m------ Rebuild User Settings ------\e[0m"
 nix run home-manager/master -- switch --flake .#abayoumy &>>nixos-switch.log || (cat nixos-switch.log | grep --color error: && exit 1)
 echo -e "\e[32m------ Operation Completed Successfully ------\e[0m"
+
+# echo -e "\e[32m------ nixos Rebuild  ------\e[0m"
+# sudo nixos-rebuild switch --flake . &>>nixos-switch.log || (cat nixos-switch.log | grep --color error: && exit 1)
 
 # Back to where you were
 popd &>/dev/null

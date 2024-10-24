@@ -10,8 +10,14 @@ if [ "$EUID" -ne 0 ]; then
 fi
 
 # Check if the envsubst is installed
+# Check if envsubst is installed
 if ! nix-env -q envsubst >/dev/null 2>&1; then
     nix-env -iA nixos.envsubst
+fi
+
+# Check if git is installed
+if ! command -v git >/dev/null 2>&1; then
+    nix-env -iA nixos.git
 fi
 
 DEVICE="/dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_drive-scsi0"
@@ -70,11 +76,16 @@ envsubst "${HASHED_PASSWORD}" < configuration.nix > /mnt/etc/nixos/configuration
 
 nixos-install
 
+git clone https://github.com/Aabayoumy/nixos01.git /mnt/home/abayoumy/.dotfiles
+sudo chown -R 1000:100 /mnt/home/abayoumy/.dotfiles
+
+
+
 while true; do
-    read -p "Do you want to reboot now? (y/n) " yn
+    read -p "Do you want to poweroff now? (y/n) " yn
     case $yn in
         [Yy]* )
-            reboot
+            poweroff
             break;;
         [Nn]* )
             exit;;
