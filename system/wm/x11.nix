@@ -8,7 +8,7 @@
   # Configure X11
   services.xserver = {
     enable = true;
-    layout = "us,ara";
+    layout = "us";
     xkbVariant = ",digits";
     xkbOptions = "grp:alt_shift_toggle,caps:escape";
     displayManager.sddm.settings.General.DisplayServer = "x11-user";
