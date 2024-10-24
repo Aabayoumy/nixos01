@@ -12,7 +12,7 @@
     xkbVariant = "";
     xkbOptions = "caps:escape";
     excludePackages = [pkgs.xterm];
-    services.displayManager.sddm.enable = true;
+    
     # displayManager = {
     #   lightdm.enable = true;
     #   sessionCommands = ''
@@ -27,4 +27,5 @@
       touchpad.disableWhileTyping = true;
     };
   };
+  services.displayManager.sddm.enable = true;
 }
