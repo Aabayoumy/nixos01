@@ -12,20 +12,10 @@ git pull origin master --rebase --autostash || exit 1
 fi
 
 # check if hardware-configuration.nix exist in system folder
-# if [ ! -f ./system/hardware-configuration.nix ]; then
-#   cp /etc/nixos/hardware-configuration.nix ./system/
-#   rm -rf .git 
-# fi
-
-# Check for -f argument
-while getopts 'f' flag; do
-  case "${flag}" in
-    f) force_flag=true ;;
-    *) exit 1 ;;
-  esac
-done
-
-
+if [ ! -f ./system/hardware-configuration.nix ]; then
+  cp /etc/nixos/hardware-configuration.nix ./system/
+  git add .  
+fi
 
 
 # echo -e "\e[32m------ Autoformat nix files ------\e[0m"
