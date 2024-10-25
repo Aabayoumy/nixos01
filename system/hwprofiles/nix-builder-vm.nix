@@ -1,19 +1,17 @@
 /*
-  This profile uses NixOS to create a remote builder VM to build Linux packages,
-  which can be used to build packages for Linux on other operating systems;
-  primarily macOS.
+This profile uses NixOS to create a remote builder VM to build Linux packages,
+which can be used to build packages for Linux on other operating systems;
+primarily macOS.
 
-  It contains both the relevant guest settings as well as an installer script
-  that manages it as a QEMU virtual machine on the host.
+It contains both the relevant guest settings as well as an installer script
+that manages it as a QEMU virtual machine on the host.
 */
 {
   config,
   lib,
   options,
   ...
-}:
-
-let
+}: let
   keysDirectory = "/var/keys";
 
   user = "builder";
@@ -21,10 +19,7 @@ let
   keyType = "ed25519";
 
   cfg = config.virtualisation.darwin-builder;
-
-in
-
-{
+in {
   imports = [
     ../virtualisation/qemu-vm.nix
 
@@ -117,7 +112,7 @@ in
     #
     # This works around that by using a public DNS server other than the DNS
     # server that QEMU provides (normally 10.0.2.3)
-    networking.nameservers = [ "8.8.8.8" ];
+    networking.nameservers = ["8.8.8.8"];
 
     # The linux builder is a lightweight VM for remote building; not evaluation.
     nix.channel.enable = false;
@@ -133,7 +128,7 @@ in
 
       max-free = cfg.max-free;
 
-      trusted-users = [ user ];
+      trusted-users = [user];
     };
 
     services = {
@@ -142,72 +137,73 @@ in
       openssh = {
         enable = true;
 
-        authorizedKeysFiles = [ "${keysDirectory}/%u_${keyType}.pub" ];
+        authorizedKeysFiles = ["${keysDirectory}/%u_${keyType}.pub"];
       };
     };
 
-    system.build.macos-builder-installer =
-      let
-        privateKey = "/etc/nix/${user}_${keyType}";
+    system.build.macos-builder-installer = let
+      privateKey = "/etc/nix/${user}_${keyType}";
 
-        publicKey = "${privateKey}.pub";
+      publicKey = "${privateKey}.pub";
 
-        # This installCredentials script is written so that it's as easy as
-        # possible for a user to audit before confirming the `sudo`
-        installCredentials = hostPkgs.writeShellScript "install-credentials" ''
+      # This installCredentials script is written so that it's as easy as
+      # possible for a user to audit before confirming the `sudo`
+      installCredentials = hostPkgs.writeShellScript "install-credentials" ''
+        set -euo pipefail
+
+        KEYS="''${1}"
+        INSTALL=${hostPkgs.coreutils}/bin/install
+        "''${INSTALL}" -g nixbld -m 600 "''${KEYS}/${user}_${keyType}" ${privateKey}
+        "''${INSTALL}" -g nixbld -m 644 "''${KEYS}/${user}_${keyType}.pub" ${publicKey}
+      '';
+
+      hostPkgs = config.virtualisation.host.pkgs;
+
+      script = hostPkgs.writeShellScriptBin "create-builder" (
+        ''
           set -euo pipefail
-
-          KEYS="''${1}"
-          INSTALL=${hostPkgs.coreutils}/bin/install
-          "''${INSTALL}" -g nixbld -m 600 "''${KEYS}/${user}_${keyType}" ${privateKey}
-          "''${INSTALL}" -g nixbld -m 644 "''${KEYS}/${user}_${keyType}.pub" ${publicKey}
-        '';
-
-        hostPkgs = config.virtualisation.host.pkgs;
-
-        script = hostPkgs.writeShellScriptBin "create-builder" (
+        ''
+        +
+        # When running as non-interactively as part of a DarwinConfiguration the working directory
+        # must be set to a writeable directory.
+        (
+          if cfg.workingDirectory != "."
+          then ''
+            ${hostPkgs.coreutils}/bin/mkdir --parent "${cfg.workingDirectory}"
+            cd "${cfg.workingDirectory}"
           ''
-            set -euo pipefail
-          ''
-          +
-            # When running as non-interactively as part of a DarwinConfiguration the working directory
-            # must be set to a writeable directory.
-            (
-              if cfg.workingDirectory != "." then
-                ''
-                  ${hostPkgs.coreutils}/bin/mkdir --parent "${cfg.workingDirectory}"
-                  cd "${cfg.workingDirectory}"
-                ''
-              else
-                ""
-            )
-          + ''
-            KEYS="''${KEYS:-./keys}"
-            ${hostPkgs.coreutils}/bin/mkdir --parent "''${KEYS}"
-            PRIVATE_KEY="''${KEYS}/${user}_${keyType}"
-            PUBLIC_KEY="''${PRIVATE_KEY}.pub"
-            if [ ! -e "''${PRIVATE_KEY}" ] || [ ! -e "''${PUBLIC_KEY}" ]; then
-                ${hostPkgs.coreutils}/bin/rm --force -- "''${PRIVATE_KEY}" "''${PUBLIC_KEY}"
-                ${hostPkgs.openssh}/bin/ssh-keygen -q -f "''${PRIVATE_KEY}" -t ${keyType} -N "" -C 'builder@localhost'
-            fi
-            if ! ${hostPkgs.diffutils}/bin/cmp "''${PUBLIC_KEY}" ${publicKey}; then
-              (set -x; sudo --reset-timestamp ${installCredentials} "''${KEYS}")
-            fi
-            KEYS="$(${hostPkgs.nix}/bin/nix-store --add "$KEYS")" ${lib.getExe config.system.build.vm}
-          ''
-        );
-
-      in
+          else ""
+        )
+        + ''
+          KEYS="''${KEYS:-./keys}"
+          ${hostPkgs.coreutils}/bin/mkdir --parent "''${KEYS}"
+          PRIVATE_KEY="''${KEYS}/${user}_${keyType}"
+          PUBLIC_KEY="''${PRIVATE_KEY}.pub"
+          if [ ! -e "''${PRIVATE_KEY}" ] || [ ! -e "''${PUBLIC_KEY}" ]; then
+              ${hostPkgs.coreutils}/bin/rm --force -- "''${PRIVATE_KEY}" "''${PUBLIC_KEY}"
+              ${hostPkgs.openssh}/bin/ssh-keygen -q -f "''${PRIVATE_KEY}" -t ${keyType} -N "" -C 'builder@localhost'
+          fi
+          if ! ${hostPkgs.diffutils}/bin/cmp "''${PUBLIC_KEY}" ${publicKey}; then
+            (set -x; sudo --reset-timestamp ${installCredentials} "''${KEYS}")
+          fi
+          KEYS="$(${hostPkgs.nix}/bin/nix-store --add "$KEYS")" ${lib.getExe config.system.build.vm}
+        ''
+      );
+    in
       script.overrideAttrs (old: {
         pos = __curPos; # sets meta.position to point here; see script binding above for package definition
-        meta = (old.meta or { }) // {
-          platforms = lib.platforms.darwin;
-        };
-        passthru = (old.passthru or { }) // {
-          # Let users in the repl inspect the config
-          nixosConfig = config;
-          nixosOptions = options;
-        };
+        meta =
+          (old.meta or {})
+          // {
+            platforms = lib.platforms.darwin;
+          };
+        passthru =
+          (old.passthru or {})
+          // {
+            # Let users in the repl inspect the config
+            nixosConfig = config;
+            nixosOptions = options;
+          };
       });
 
     system = {

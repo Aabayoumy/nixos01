@@ -1,23 +1,25 @@
 # Provide a basic configuration for installation devices like CDs.
-{ config, pkgs, lib, ... }:
-
-with lib;
-
 {
-  imports =
-    [ # Enable devices which are usually scanned, because we don't know the
-      # target system.
-      ../installer/scan/detected.nix
-      ../installer/scan/not-detected.nix
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+with lib; {
+  imports = [
+    # Enable devices which are usually scanned, because we don't know the
+    # target system.
+    ../installer/scan/detected.nix
+    ../installer/scan/not-detected.nix
 
-      # Allow "nixos-rebuild" to work properly by providing
-      # /etc/nixos/configuration.nix.
-      ./clone-config.nix
+    # Allow "nixos-rebuild" to work properly by providing
+    # /etc/nixos/configuration.nix.
+    ./clone-config.nix
 
-      # Include a copy of Nixpkgs so that nixos-install works out of
-      # the box.
-      ../installer/cd-dvd/channel.nix
-    ];
+    # Include a copy of Nixpkgs so that nixos-install works out of
+    # the box.
+    ../installer/cd-dvd/channel.nix
+  ];
 
   config = {
     system.nixos.variant_id = lib.mkDefault "installer";
@@ -31,7 +33,7 @@ with lib;
     # Use less privileged nixos user
     users.users.nixos = {
       isNormalUser = true;
-      extraGroups = [ "wheel" "networkmanager" "video" ];
+      extraGroups = ["wheel" "networkmanager" "video"];
       # Allow the graphical user to login without password
       initialHashedPassword = "";
     };
@@ -52,21 +54,23 @@ with lib;
     services.getty.autologinUser = "nixos";
 
     # Some more help text.
-    services.getty.helpLine = ''
-      The "nixos" and "root" accounts have empty passwords.
+    services.getty.helpLine =
+      ''
+        The "nixos" and "root" accounts have empty passwords.
 
-      To log in over ssh you must set a password for either "nixos" or "root"
-      with `passwd` (prefix with `sudo` for "root"), or add your public key to
-      /home/nixos/.ssh/authorized_keys or /root/.ssh/authorized_keys.
+        To log in over ssh you must set a password for either "nixos" or "root"
+        with `passwd` (prefix with `sudo` for "root"), or add your public key to
+        /home/nixos/.ssh/authorized_keys or /root/.ssh/authorized_keys.
 
-      If you need a wireless connection, type
-      `sudo systemctl start wpa_supplicant` and configure a
-      network using `wpa_cli`. See the NixOS manual for details.
-    '' + optionalString config.services.xserver.enable ''
+        If you need a wireless connection, type
+        `sudo systemctl start wpa_supplicant` and configure a
+        network using `wpa_cli`. See the NixOS manual for details.
+      ''
+      + optionalString config.services.xserver.enable ''
 
-      Type `sudo systemctl start display-manager' to
-      start the graphical user interface.
-    '';
+        Type `sudo systemctl start display-manager' to
+        start the graphical user interface.
+      '';
 
     # We run sshd by default. Login is only possible after adding a
     # password via "passwd" or by adding a ssh key to ~/.ssh/authorized_keys.
@@ -97,15 +101,14 @@ with lib;
 
     # To speed up installation a little bit, include the complete
     # stdenv in the Nix store on the CD.
-    system.extraDependencies = with pkgs;
-      [
-        stdenv
-        stdenvNoCC # for runCommand
-        busybox
-        jq # for closureInfo
-        # For boot.initrd.systemd
-        makeInitrdNGTool
-      ];
+    system.extraDependencies = with pkgs; [
+      stdenv
+      stdenvNoCC # for runCommand
+      busybox
+      jq # for closureInfo
+      # For boot.initrd.systemd
+      makeInitrdNGTool
+    ];
 
     boot.swraid.enable = true;
     # remove warning about unset mail
@@ -125,14 +128,14 @@ with lib;
     '';
 
     # allow nix-copy to live system
-    nix.settings.trusted-users = [ "nixos" ];
+    nix.settings.trusted-users = ["nixos"];
 
     # Install less voices for speechd to save some space
     nixpkgs.overlays = [
       (_: prev: {
         mbrola-voices = prev.mbrola-voices.override {
           # only ship with one voice per language
-          languages = [ "*1" ];
+          languages = ["*1"];
         };
       })
     ];

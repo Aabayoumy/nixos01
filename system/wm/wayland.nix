@@ -24,13 +24,27 @@
     })
   ];
 
-  # Configure xwayland
-  services.xserver = {
-    enable = true;
-    xkb = {
+  services = {
+    xserver = {
+      enable = true;
       layout = "us";
-      variant = "";
-      options = "caps:escape";
+      xkbVariant = "";
+      excludePackages = [pkgs.xterm];
+      # videoDrivers = ["nvidia"];
+      libinput.enable = true;
+    };
+    dbus.enable = true;
+    gvfs.enable = true;
+    tumbler.enable = true;
+    gnome = {
+      sushi.enable = true;
+      gnome-keyring.enable = true;
+    };
+    displayManager.sddm = {
+      enable = true;
+      # wayland = true;
+      enableHidpi = true;
+      theme = "chili";
     };
   };
 }

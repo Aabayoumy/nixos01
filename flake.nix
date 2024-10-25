@@ -1,6 +1,5 @@
 {
   description = "Flake of ABayoumy";
-
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "nixpkgs/nixos-24.05";
@@ -8,32 +7,7 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     alejandra.url = "github:kamadorueda/alejandra/3.0.0";
     alejandra.inputs.nixpkgs.follows = "nixpkgs";
-
-    # System application(s)
-    ragenix = {
-      url = "github:yaxitech/ragenix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    kmonad = {
-      url = "github:kmonad/kmonad?dir=nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    # Window Manager(s) + Extensions
-    xmonad = {
-      url = "github:xmonad/xmonad";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    xmonad-contrib.url = "github:xmonad/xmonad-contrib";
-
-    xmonad-contexts = {
-      url = "github:Procrat/xmonad-contexts";
-      flake = false;
-    };
-    pyprland.url = "github:hyprland-community/pyprland";
-
     stylix.url = "github:danth/stylix";
-
     blocklist-hosts = {
       url = "github:StevenBlack/hosts";
       flake = false;
@@ -51,8 +25,8 @@
     systemSettings = {
       system = "x86_64-linux"; # system arch
       hostname = "nixos01"; # hostname
-      profile = "desktop"; # select a profile defined from my profiles directory
-      wm = "kde";
+      profile = "server"; # select a profile defined from my profiles directory
+      wm = "hyprland";
       wmType = "x11";
       timezone = "Africa/Cairo"; # select timezone
       locale = "en_US.UTF-8"; # select locale
@@ -65,10 +39,10 @@
       username = "abayoumy"; # username
       name = "Ahmed Bayoumy"; # name/identifier
       email = "abayoumy@outlook.com";
-      theme = "Dracula";
+      theme = "dracula";
       browser = "firefox";
-      wm = "kde";
-      spawnBrowser = browser ; # Browser spawn command must be specail for qb, since it doesn't gpu accelerate by default (why?)
+      wm = systemSettings.wm;
+      spawnBrowser = browser; # Browser spawn command must be specail for qb, since it doesn't gpu accelerate by default (why?)
       term = "kitty"; # Default terminal command;
       font = "Intel One Mono"; # Selected font
       fontPkg = pkgs.intel-one-mono; # Font package
@@ -83,7 +57,7 @@
         allowUnfreePredicate = _: true;
       };
     };
-    pkgs-nwg-dock-hyprland = import inputs.nwg-dock-hyprland-pin-nixpkgs {
+    pkgs-nwg-dock-kde = import inputs.nwg-dock-kde-pin-nixpkgs {
       system = systemSettings.system;
     };
     pkgs = pkgs-stable;
@@ -113,7 +87,7 @@
           # pass config variables from above
           inherit pkgs-stable;
           inherit systemSettings;
-          inherit pkgs-nwg-dock-hyprland;
+          inherit pkgs-nwg-dock-kde;
           inherit userSettings;
           inherit inputs;
         };

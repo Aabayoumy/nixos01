@@ -2,11 +2,11 @@
 # installed as an image, cannot be re-built, has no Nix available, and is
 # generally not meant for interactive use. Updates to such an appliance are
 # handled by updating whole partition images via a tool like systemd-sysupdate.
-
-{ lib, modulesPath, ... }:
-
 {
-
+  lib,
+  modulesPath,
+  ...
+}: {
   # Appliances are always "minimal".
   imports = [
     "${modulesPath}/profiles/minimal.nix"

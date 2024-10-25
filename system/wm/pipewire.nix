@@ -1,5 +1,5 @@
 {...}: {
-    hardware.pulseaudio.enable = false;
+  hardware.pulseaudio.enable = false;
   # Pipewire
   security.rtkit.enable = true;
   services.pipewire = {

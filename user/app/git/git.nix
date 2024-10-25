@@ -11,8 +11,8 @@
   programs.git.extraConfig = {
     init.defaultBranch = "main";
     safe.directory = [
-      "/media/data/nixos01"
-      "/media/data/nixos01/.git"
+      ("/home/" + userSettings.username + "/.dotfiles")
+      ("/home/" + userSettings.username + "/.dotfiles/.git")
     ];
   };
 }

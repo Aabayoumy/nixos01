@@ -12,7 +12,7 @@
     then "Adwaita"
     else "Adwaita-dark";
   backgroundUrl = builtins.readFile (./. + "../../../themes" + ("/" + userSettings.theme) + "/backgroundurl.txt");
-  backgroundSha256 = builtins.readFile (./. + "../../../themes/" + ("/" + userSettings.theme) + "/backgroundsha256.txt");
+  backgroundSha256 = builtins.readFile (./. + "../../../themes" + ("/" + userSettings.theme) + "/backgroundsha256.txt");
 in {
   imports = [inputs.stylix.nixosModules.stylix];
 
@@ -49,7 +49,6 @@ in {
   };
 
   stylix.targets.console.enable = true;
-
 
   environment.sessionVariables = {
     QT_QPA_PLATFORMTHEME = "qt5ct";

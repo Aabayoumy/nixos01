@@ -1,11 +1,11 @@
+# Edit this configuration file to define what should be installed on
+# your system.  Help is available in the configuration.nix(5) man page
+# and in the NixOS manual (accessible by running ‘nixos-help’).
 {
-  inputs,
+  config,
   pkgs,
-  lib,
   ...
-}: let
-  pkgs-hyprland = inputs.hyprland.inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system};
-in {
+}: {
   # Import wayland config
   imports = [
     ./wayland.nix
@@ -25,7 +25,6 @@ in {
     swaynotificationcenter
     wlr-randr
     ydotool
-    hyprland-share-picker
     wl-clipboard
     hyprland-protocols
     hyprpicker
@@ -47,50 +46,14 @@ in {
     adwaita-qt6
   ];
 
-  # Security
-  security = {
-    pam.services.login.enableGnomeKeyring = true;
-  };
+  programs.hyprland = {
+    # Install the packages from nixpkgs
+    enable = true;
+    # Whether to enable XWayland
+    xwayland.enable = true;
 
-  services.gnome.gnome-keyring.enable = true;
-
-  programs = {
-    hyprland = {
-      enable = true;
-      package = inputs.hyprland.packages.${pkgs.system}.hyprland;
-      xwayland = {
-        enable = true;
-      };
-      portalPackage = pkgs-hyprland.xdg-desktop-portal-hyprland;
-    };
-  };
-
-  services = {
-    xserver = {
-      enable = true;
-      layout = "us";
-      xkbVariant = "";
-      excludePackages = [pkgs.xterm];
-      videoDrivers = ["nvidia"];
-      libinput.enable = true;
-      displayManager.gdm = {
-        enable = true;
-        wayland = true;
-      };
-    };
-    dbus.enable = true;
-    gvfs.enable = true;
-    tumbler.enable = true;
-    gnome = {
-      sushi.enable = true;
-      gnome-keyring.enable = true;
-    };
-    displayManager.sddm = {
-      enable = true;
-      wayland.enable = true;
-      enableHidpi = true;
-      theme = "chili";
-      package = pkgs.sddm;
-    };
+    # Optional
+    # Whether to enable patching wlroots for better Nvidia support
+    #enableNvidiaPatches = true;
   };
 }
