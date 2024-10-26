@@ -32,7 +32,7 @@
         # conflicts with thefuck binding: "sudo" # Easily prefix your current or previous commands with sudo by pressing esc twice. https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/sudo
         "systemd" # useful aliases for systemd. https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/systemd
         "thefuck" # corrects your previous console command. https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/thefuck
-        "tmux" # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/tmux
+        # "tmux" # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/tmux
         "z" # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/z
       ];
     };
@@ -45,6 +45,9 @@
     };
     initExtra = ''
       clear
+      ( [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ] || [ "$(ps -o comm= -p "$PPID")" = "sshd" ] ) &&
+      [ $(\tmux ls | grep -w "$(whoami)" | grep -cw attached) -eq 0 ] &&
+      $( $(systemd-run --scope --user echo 2>/dev/null) && echo -n systemd-run --scope --user) \tmux new -A -s "$(whoami)" && exit
       fastfetch
     '';
   };

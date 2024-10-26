@@ -12,11 +12,11 @@
 
   home.sessionVariables = {
     EDITOR = "micro";
-    ZSH_TMUX_AUTOSTART = "true";
-    ZSH_TMUX_AUTOSTART_ONCE = "true";
-    ZSH_TMUX_AUTOQUIT = "true";
-    ZSH_TMUX_AUTOCONNECT = "true";
-    ZSH_TMUX_AUTONAME_SESSION = "abayoumy";
+    # ZSH_TMUX_AUTOSTART = "false";
+    # ZSH_TMUX_AUTOSTART_ONCE = "true";
+    # ZSH_TMUX_AUTOQUIT = "true";
+    # ZSH_TMUX_AUTOCONNECT = "false";
+    # ZSH_TMUX_AUTONAME_SESSION = "abayoumy";
   };
 
   home.file = {

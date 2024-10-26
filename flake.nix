@@ -33,13 +33,13 @@
       bootMode = "uefi"; # uefi or bios
       bootMountPath = "/boot"; # mount path for efi boot partition; only used for uefi boot mode
       grubDevice = ""; # device identifier for grub; only used for legacy (bios) boot mode
-      gpuType = "amd"; # amd, intel or nvidia; only makes some slight mods for amd at the moment
+      gpuType = "nvidia"; # amd, intel or nvidia; only makes some slight mods for amd at the moment
     };
     userSettings = rec {
       username = "abayoumy"; # username
       name = "Ahmed Bayoumy"; # name/identifier
       email = "abayoumy@outlook.com";
-      theme = "gruvbox-dark-medium";
+      theme = "dracula";
       browser = "firefox";
       wm = "hyprland";
       spawnBrowser = "firefox"; # Browser spawn command must be specail for qb, since it doesn't gpu accelerate by default (why?)
