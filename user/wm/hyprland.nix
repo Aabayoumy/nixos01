@@ -306,8 +306,7 @@
     }
   '';
 
-  home.file.".config/hypr/animation.conf".text =
-    ''
+  home.file.".config/hypr/animation.conf".text = ''
       general {
           gaps_in = 3
           gaps_out = 5
@@ -443,36 +442,23 @@
            workspace_swipe_cancel_ratio = 0.5
            workspace_swipe_create_new = false
       }
-    '';
+  '';
 
-  home.file.".config/hypr/hyprlock.conf".text =
-    ''          
+  home.file.".config/hypr/hyprlock.conf".text = ''          
       background {
         monitor =
-        path = screenshot
-          
+        path = ''
+      + config.stylix.image
+      + ''
+
         # all these options are taken from hyprland, see https://wiki.hyprland.org/Configuring/Variables/#blur for explanations
-        blur_passes = 4
-        blur_size = 5
+        blur_passes = 1
+        blur_size = 1
         noise = 0.0117
         contrast = 0.8916
         brightness = 0.8172
         vibrancy = 0.1696
         vibrancy_darkness = 0.0
-      }
-          
-      # doesn't work yet
-      image {
-        monitor =
-        path = /home/emmet/.dotfiles/user/wm/hyprland/nix-dark.png
-        size = 150 # lesser side if not 1:1 ratio
-        rounding = -1 # negative values mean circle
-        border_size = 0
-        rotate = 0 # degrees, counter-clockwise
-          
-        position = 0, 200
-        halign = center
-        valign = center
       }
           
       input-field {
@@ -538,7 +524,7 @@
           
           label {
             monitor =
-            text = Hello, Emmet
+            text = Hello, $USER
             color = rgb(''
     + config.lib.stylix.colors.base07-rgb-r
     + '',''
@@ -576,7 +562,7 @@
             halign = center
             valign = center
           }
-    '';
+  '';
 
   services.udiskie.enable = true;
   services.udiskie.tray = "always";
@@ -604,4 +590,5 @@
       ];
     };
   };
+
 }
