@@ -1,6 +1,4 @@
-{
-  config,
-  ...
-}: {  services.udiskie.enable = true;
-    services.udiskie.tray = "always";
+{config, ...}: {
+  services.udiskie.enable = true;
+  services.udiskie.tray = "always";
 }

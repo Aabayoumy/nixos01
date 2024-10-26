@@ -15,10 +15,10 @@
   home.homeDirectory = "/home/" + userSettings.username;
   home.stateVersion = "24.05";
 
-  home.packages = with pkgs; [
-    kitty
-    firefox
-  ];
+  # home.packages = with pkgs; [
+  #   kitty
+  #   firefox
+  # ];
 
   programs.home-manager.enable = true;
 }

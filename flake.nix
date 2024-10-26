@@ -25,7 +25,7 @@
     systemSettings = {
       system = "x86_64-linux"; # system arch
       hostname = "nixos01"; # hostname
-      profile = "server"; # select a profile defined from my profiles directory
+      profile = "desktop"; # select a profile defined from my profiles directory
       wm = "hyprland";
       wmType = "x11";
       timezone = "Africa/Cairo"; # select timezone
@@ -39,10 +39,10 @@
       username = "abayoumy"; # username
       name = "Ahmed Bayoumy"; # name/identifier
       email = "abayoumy@outlook.com";
-      theme = "dracula";
+      theme = "gruvbox-dark-medium";
       browser = "firefox";
-      wm = systemSettings.wm;
-      spawnBrowser = browser; # Browser spawn command must be specail for qb, since it doesn't gpu accelerate by default (why?)
+      wm = "hyprland";
+      spawnBrowser = "firefox"; # Browser spawn command must be specail for qb, since it doesn't gpu accelerate by default (why?)
       term = "kitty"; # Default terminal command;
       font = "Intel One Mono"; # Selected font
       fontPkg = pkgs.intel-one-mono; # Font package

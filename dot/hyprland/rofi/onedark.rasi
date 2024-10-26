@@ -1,0 +1,82 @@
+/*
+ * ROFI One Dark
+ *
+ * Based on OneDark.vim (https://github.com/joshdick/onedark.vim)
+ *
+ * Author: Benjamin Stauss
+ * User: me-benni
+ *
+ */
+
+* {
+  spacing: 0;
+  background-color: transparent;
+  text-color: #dfdfdf;
+}
+
+window {
+  background-color: #282c34ee;
+  width: 1000px;
+  height: 1000px;
+  border: 1px;
+  border-color: #98c379;
+}
+
+mainbox {
+  padding: 1% 1%;
+}
+
+inputbar {
+  margin: 0px 0px 15px 0px;
+  children: [prompt, textbox-prompt-colon, entry, case-indicator];
+}
+
+prompt {
+  text-color: #eb6e67;
+}
+
+textbox-prompt-colon {
+  expand: false;
+  str: "";
+  text-color: #b2b2b2;
+}
+
+listview {
+  spacing: 2px;
+  dynamic: true;
+  scrollbar: false;
+}
+
+element {
+  padding: 2px;
+  text-color: #b2b2b2;
+  highlight: bold #95ee8f;
+  border-radius: 3px;
+}
+
+element-icon {
+    size: 48px;
+}
+
+element selected {
+  background-color: #50536b;
+  text-color: #dfdfdf;
+}
+
+element urgent, element selected urgent {
+  text-color: #eb6e67;
+}
+
+message {
+  text-color: #eb6e67;
+  padding: 5px;
+  margin: 0 0 10px 0;
+  border: 1px;
+  border-color: #95ee8f;
+}
+
+button selected {
+  padding: 5px;
+  border-radius: 3px;
+  background-color: #50536b;
+}

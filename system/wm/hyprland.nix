@@ -12,38 +12,39 @@
     ./pipewire.nix
     ./dbus.nix
   ];
+
   environment.systemPackages = with pkgs; [
-    kitty
+    killall
     polkit_gnome
+    papirus-icon-theme
     libva-utils
-    fuseiso
-    udiskie
-    gnome.adwaita-icon-theme
-    gnome.gnome-themes-extra
-    nvidia-vaapi-driver
-    gsettings-desktop-schemas
-    swaynotificationcenter
+    libinput-gestures
+    zenity
     wlr-randr
+    wtype
     ydotool
     wl-clipboard
     hyprland-protocols
     hyprpicker
-    swayidle
-    swaylock
-    xdg-desktop-portal-hyprland
+    hyprlock
+    hypridle
     hyprpaper
-    wofi
-    firefox-wayland
-    swww
+    fnott
+    keepmenu
+    pinentry-gnome3
+    wev
     grim
+    slurp
+    libsForQt5.qt5.qtwayland
+    qt6.qtwayland
     xdg-utils
     xdg-desktop-portal
     xdg-desktop-portal-gtk
-    qt5.qtwayland
-    qt6.qmake
-    qt6.qtwayland
-    adwaita-qt
-    adwaita-qt6
+    xdg-desktop-portal-hyprland
+    wlsunset
+    pavucontrol
+    pamixer
+    tesseract4
   ];
 
   programs.hyprland = {
