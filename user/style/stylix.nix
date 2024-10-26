@@ -14,7 +14,7 @@ in {
   imports = [inputs.stylix.homeManagerModules.stylix];
 
   home.file.".currenttheme".text = userSettings.theme;
-  stylix.autoEnable = false;
+  stylix.autoEnable = true;
   stylix.polarity = themePolarity;
   stylix.image = pkgs.fetchurl {
     url = backgroundUrl;

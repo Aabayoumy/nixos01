@@ -6,8 +6,8 @@
 }: {
   imports = [
     ../server/configuration.nix
-    (./. + "../../../system/wm" + ("/" + systemSettings.wm) + ".nix") # My window manager
     ../../system/style/stylix.nix
+    (./. + "../../../system/wm" + ("/" + systemSettings.wm) + ".nix") # My window manager
   ];
   environment.systemPackages = with pkgs; [
     #obs-studio-plugins.wlrobs
@@ -30,7 +30,6 @@
     picom
     python311Packages.sparklines
     pywal
-    rofi
     sddm-kcm
     swaybg
     waybar

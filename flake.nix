@@ -1,3 +1,4 @@
+## Sourc https://github.com/librephoenix/nixos-config
 {
   description = "Flake of ABayoumy";
   inputs = {
@@ -26,10 +27,13 @@
       system = "x86_64-linux"; # system arch
       hostname = "nixos01"; # hostname
       profile = "desktop"; # select a profile defined from my profiles directory
-      wm = "hyprland";
-      wmType = "x11";
       timezone = "Africa/Cairo"; # select timezone
       locale = "en_US.UTF-8"; # select locale
+      wm = "hyprland";
+      wmType =
+        if ((systemSettings.wm == "hyprland") || (systemSettings.wm == "plasma"))
+        then "wayland"
+        else "x11";
       bootMode = "uefi"; # uefi or bios
       bootMountPath = "/boot"; # mount path for efi boot partition; only used for uefi boot mode
       grubDevice = ""; # device identifier for grub; only used for legacy (bios) boot mode
@@ -39,10 +43,22 @@
       username = "abayoumy"; # username
       name = "Ahmed Bayoumy"; # name/identifier
       email = "abayoumy@outlook.com";
-      theme = "dracula";
-      browser = "firefox";
+      theme = "io";
+      browser = "librewolf";
       wm = "hyprland";
-      spawnBrowser = "firefox"; # Browser spawn command must be specail for qb, since it doesn't gpu accelerate by default (why?)
+      wmType =
+        if ((userSettings.wm == "hyprland") || (userSettings.wm == "plasma"))
+        then "wayland"
+        else "x11";
+      spawnBrowser =
+        if ((userSettings.browser == "qutebrowser") && (wm == "hyprland"))
+        then "qutebrowser-hyprprofile"
+        else
+          (
+            if (userSettings.browser == "qutebrowser")
+            then "qutebrowser --qt-flag enable-gpu-rasterization --qt-flag enable-native-gpu-memory-buffers --qt-flag num-raster-threads=4"
+            else userSettings.browser
+          ); # Browser spawn command must be specail for qb, since it doesn't gpu accelerate by default (why?)
       term = "kitty"; # Default terminal command;
       font = "Intel One Mono"; # Selected font
       fontPkg = pkgs.intel-one-mono; # Font package

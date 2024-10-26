@@ -16,7 +16,7 @@
 in {
   imports = [inputs.stylix.nixosModules.stylix];
 
-  stylix.autoEnable = false;
+  stylix.autoEnable = true;
   stylix.polarity = themePolarity;
   stylix.image = pkgs.fetchurl {
     url = backgroundUrl;

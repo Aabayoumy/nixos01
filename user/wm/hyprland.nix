@@ -9,6 +9,8 @@
 }: {
   imports = [
     ../app/terminal/kitty.nix
+    ../app/rofi.nix
+    ./pyprland.nix
   ];
   gtk.cursorTheme = {
     package = pkgs.quintom-cursor-theme;
@@ -18,11 +20,12 @@
       else "Quintom_Snow";
     size = 36;
   };
+
   wayland.windowManager.hyprland = {
     enable = true;
     settings = {};
     extraConfig =
-      ''        
+      ''          
         $mainMod = SUPER
         $terminal = kitty
         $browser = ''
@@ -37,7 +40,7 @@
         exec-once = dbus-update-activation-environment --systemd &
         exec-once = nm-applet &
         exec-once = hypridle
-          
+            
         ################
         ### imports   ###
         ################
@@ -46,7 +49,7 @@
         source = ~/.config/hypr/input.conf
         source = ~/.config/hypr/animation.conf
         source = ~/.config/hypr/scratchpads.conf
-          
+            
         exec-once = hyprctl setcursor ''
       + config.gtk.cursorTheme.name
       + " "
@@ -190,9 +193,9 @@
         #exec-once = telegram-desktop
         #exec-once = armcord
         exec-once = swaybg  -m fill -o \* -i  ''
-        + config.stylix.image 
-        + '' 
-        
+      + config.stylix.image
+      + ''
+
         #------------#
         # auto start #
         #------------#
@@ -274,32 +277,6 @@
     monitor=DP-1,2560x1440@120,1920x0,1.0
   '';
 
-  home.file.".config/hypr/hypridle.conf".text = ''
-    general {
-        lock_cmd = pidof hyprlock || hyprlock       # avoid starting multiple hyprlock instances.
-        before_sleep_cmd = loginctl lock-session    # lock before suspend.
-        after_sleep_cmd = hyprctl dispatch dpms on  # to avoid having to press a key twice to turn on the display.
-    }
-
-    # Screenlock
-    listener {
-        # HYPRLOCK TIMEOUT
-        timeout = 600
-        # HYPRLOCK ONTIMEOUT
-        on-timeout = loginctl lock-session
-    }
-
-    # dpms
-    listener {
-        # DPMS TIMEOUT
-        timeout = 660
-        # DPMS ONTIMEOUT
-        on-timeout = hyprctl dispatch dpms off
-        # DPMS ONRESUME
-        on-resume = hyprctl dispatch dpms on
-    }
-  '';
-
   home.file.".config/hypr/workspaces.conf".text = ''
     workspace=1,monitor:DP-1,default:true
     workspace=3,monitor:DP-1
@@ -310,57 +287,6 @@
     workspace=4,monitor:HDMI-A-1
     workspace=6,monitor:HDMI-A-1
     workspace=8,monitor:HDMI-A-1
-  '';
-  home.file.".config/hypr/scratchpads.conf".text = ''
-    exec-once = /usr/local/bin/pypr --debug /tmp/pypr.log
-    bind = $mainMod SHIFT, RETURN, exec, pypr toggle term                  # toggles the "term" scratchpad visibility
-    bind = $mainMod CTRL, V, exec, pypr toggle volume && hyprctl dispatch bringactivetotop
-
-    $scratchpadsize = size 98% 95%
-    $scratchpad = class:^(main-dropterm)$
-    windowrulev2 = float,$scratchpad
-    windowrulev2 = $scratchpadsize.$scratchpad
-    windowrulev2 = workspace special silent,$scratchpad
-    windowrulev2 = center,$scratchpad
-
-    windowrulev2 = float,class:^(org.pulseaudio.pavucontrol)$
-    windowrulev2 = workspace special silent,class:^(pavucontrol)$
-
-  '';
-
-  home.file.".config/hypr/pyprland.toml".text = ''
-    [pyprland]
-    plugins = [
-     "expose",
-     "fetch_client_menu",
-     "lost_windows",
-     "magnify",
-     "scratchpads",
-     "shift_monitors",
-     "toggle_special",
-     "workspaces_follow_focus",
-    ]
-
-    # using variables for demonstration purposes (not needed)
-    [pyprland.variables]
-    term_classed = "kitty --class"
-
-    [scratchpads.term]
-    animation = "fromTop"
-    command = "[term_classed] main-dropterm"
-    class = "main-dropterm"
-    # size = "98% 90%"
-    # max_size = "1920px 100%"
-    unfocus = "hide"
-    margin = 50
-    lazy = trueV
-
-    [scratchpads.volume]
-    command = "pavucontrol"
-    animation = "fromRight"
-    lazy = true
-    size = "40% 40%"
-    unfocus = "hide"
   '';
 
   home.file.".config/hypr/input.conf".text = ''
@@ -411,10 +337,10 @@
     + config.lib.stylix.colors.base0F
     + " "
     + ''      270deg
-          
+      
               col.inactive_border = 0xaa''
     + config.lib.stylix.colors.base02
-    + ''        
+    + ''          
 
           layout = master # master|dwindle
 
@@ -520,11 +446,11 @@
     '';
 
   home.file.".config/hypr/hyprlock.conf".text =
-    ''        
+    ''          
       background {
         monitor =
         path = screenshot
-        
+          
         # all these options are taken from hyprland, see https://wiki.hyprland.org/Configuring/Variables/#blur for explanations
         blur_passes = 4
         blur_size = 5
@@ -534,7 +460,7 @@
         vibrancy = 0.1696
         vibrancy_darkness = 0.0
       }
-        
+          
       # doesn't work yet
       image {
         monitor =
@@ -543,12 +469,12 @@
         rounding = -1 # negative values mean circle
         border_size = 0
         rotate = 0 # degrees, counter-clockwise
-        
+          
         position = 0, 200
         halign = center
         valign = center
       }
-        
+          
       input-field {
         monitor =
         size = 200, 50
@@ -604,12 +530,12 @@
             bothlock_color = -1 # when both locks are active. -1 means don't change outer color (same for above)
             invert_numlock = false # change color if numlock is off
             swap_font_color = false # see below
-        
+          
             position = 0, -20
             halign = center
             valign = center
           }
-        
+          
           label {
             monitor =
             text = Hello, Emmet
@@ -623,15 +549,15 @@
             font_size = 25
             font_family = ''
     + userSettings.font
-    + ''        
-        
+    + ''          
+          
         rotate = 0 # degrees, counter-clockwise
-        
+          
         position = 0, 160
         halign = center
         valign = center
       }
-        
+          
       label {
         monitor =
         text = $TIME
@@ -654,4 +580,28 @@
 
   services.udiskie.enable = true;
   services.udiskie.tray = "always";
+
+  services.hypridle = {
+    enable = true;
+    settings = {
+      general = {
+        after_sleep_cmd = "hyprctl dispatch dpms on";
+        before_sleep_cmd = "loginctl lock-session";
+        ignore_dbus_inhibit = false;
+        lock_cmd = "pidof hyprlock || hyprlock";
+      };
+
+      listener = [
+        {
+          timeout = 300;
+          on-timeout = "loginctl lock-session";
+        }
+        {
+          timeout = 420;
+          on-timeout = "hyprctl dispatch dpms off";
+          on-resume = "hyprctl dispatch dpms on";
+        }
+      ];
+    };
+  };
 }

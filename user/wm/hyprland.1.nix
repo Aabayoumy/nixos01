@@ -23,14 +23,14 @@
     enable = true;
     settings = {};
     extraConfig =
-      ''        
+      ''          
         exec-once = dbus-update-activation-environment --systemd DISPLAY XAUTHORITY WAYLAND_DISPLAY XDG_SESSION_DESKTOP=Hyprland XDG_CURRENT_DESKTOP=Hyprland XDG_SESSION_TYPE=wayland
         exec-once = hyprctl setcursor ''
       + config.gtk.cursorTheme.name
       + " "
       + builtins.toString config.gtk.cursorTheme.size
-      + ''        
-        
+      + ''          
+          
         env = XDG_CURRENT_DESKTOP,Hyprland
         env = XDG_SESSION_DESKTOP,Hyprland
         env = XDG_SESSION_TYPE,wayland
@@ -42,9 +42,9 @@
         env = QT_WAYLAND_DISABLE_WINDOWDECORATION,1
         env = CLUTTER_BACKEND,wayland
         env = GDK_PIXBUF_MODULE_FILE,${pkgs.librsvg}/lib/gdk-pixbuf-2.0/2.10.0/loaders.cache
-        
+          
         exec-once = hyprprofile Default
-        
+          
         exec-once = ydotoold
         #exec-once = STEAM_FRAME_FORCE_CLOSE=1 steam -silent
         exec-once = nm-applet
@@ -52,19 +52,19 @@
         exec-once = GOMAXPROCS=1 syncthing --no-browser
         exec-once = protonmail-bridge --noninteractive
         exec-once = waybar
-        
+          
         exec-once = hypridle
         exec-once = sleep 5 && libinput-gestures
         exec-once = obs-notification-mute-daemon
-        
+          
         exec-once = hyprpaper
-        
+          
         bezier = wind, 0.05, 0.9, 0.1, 1.05
         bezier = winIn, 0.1, 1.1, 0.1, 1.0
         bezier = winOut, 0.3, -0.3, 0, 1
         bezier = liner, 1, 1, 1, 1
         bezier = linear, 0.0, 0.0, 1.0, 1.0
-        
+          
         animations {
              enabled = yes
              animation = windowsIn, 1, 6, winIn, popin
@@ -77,7 +77,7 @@
              animation = windows, 1, 6, wind, slide
              animation = specialWorkspace, 1, 6, default, slidefadevert -50%
         }
-        
+          
         general {
           layout = master
           border_size = 5
@@ -106,21 +106,21 @@
       + config.lib.stylix.colors.base0F
       + " "
       + ''        270deg
-        
+          
                 col.inactive_border = 0xaa''
       + config.lib.stylix.colors.base02
-      + ''        
-        
+      + ''          
+          
              resize_on_border = true
              gaps_in = 7
              gaps_out = 7
         }
-        
+          
         cursor {
           no_warps = false
           inactive_timeout = 30
         }
-        
+          
                bind=SUPER,SPACE,fullscreen,1
                bind=SUPERSHIFT,F,fullscreen,0
                bind=SUPER,Y,workspaceopt,allfloat
@@ -133,38 +133,38 @@
                bind=SUPERSHIFT,T,exec,screenshot-ocr
                bind=CTRLALT,Delete,exec,hyprctl kill
                bind=SUPERSHIFT,K,exec,hyprctl kill
-        
+          
                bind=,code:172,exec,lollypop -t
                bind=,code:208,exec,lollypop -t
                bind=,code:209,exec,lollypop -t
                bind=,code:174,exec,lollypop -s
                bind=,code:171,exec,lollypop -n
                bind=,code:173,exec,lollypop -p
-        
+          
                bind = SUPER,R,pass,^(com\.obsproject\.Studio)$
                bind = SUPERSHIFT,R,pass,^(com\.obsproject\.Studio)$
-        
+          
                bind=SUPER,RETURN,exec,''
       + userSettings.term
-      + ''        
-        
+      + ''          
+          
         bind=SUPERSHIFT,RETURN,exec,''
       + userSettings.term
       + " "
       + ''        --class float_term
-        
+          
               bind=SUPER,A,exec,''
       + userSettings.spawnEditor
-      + ''        
-        
+      + ''          
+          
         bind=SUPER,S,exec,''
       + userSettings.spawnBrowser
-      + ''        
-        
+      + ''          
+          
         bind=SUPERCTRL,S,exec,container-open # qutebrowser only
-        
+          
         bind=SUPERCTRL,P,pin
-        
+          
         bind=SUPER,X,exec,fnottctl dismiss
         bind=SUPERSHIFT,X,exec,fnottctl dismiss all
         bind=SUPER,Q,killactive
@@ -177,14 +177,14 @@
       + userSettings.term
       + " "
       + ''        -e numbat
-        
+          
                bind=,code:107,exec,grim -g "$(slurp)"
                bind=SHIFT,code:107,exec,grim -g "$(slurp -o)"
                bind=SUPER,code:107,exec,grim
                bind=CTRL,code:107,exec,grim -g "$(slurp)" - | wl-copy
                bind=SHIFTCTRL,code:107,exec,grim -g "$(slurp -o)" - | wl-copy
                bind=SUPERCTRL,code:107,exec,grim - | wl-copy
-        
+          
                bind=,code:122,exec,swayosd-client --output-volume lower
                bind=,code:123,exec,swayosd-client --output-volume raise
                bind=,code:121,exec,swayosd-client --output-volume mute-toggle
@@ -197,21 +197,21 @@
                bind=,code:238,exec,brightnessctl --device='asus::kbd_backlight' set +1
                bind=,code:255,exec,airplane-mode
                bind=SUPER,C,exec,wl-copy $(hyprpicker)
-        
+          
                bind=SUPERSHIFT,S,exec,systemctl suspend
                bindl=,switch:on:Lid Switch,exec,loginctl lock-session
                bind=SUPERCTRL,L,exec,loginctl lock-session
-        
+          
                bind=SUPER,H,movefocus,l
                bind=SUPER,J,movefocus,d
                bind=SUPER,K,movefocus,u
                bind=SUPER,L,movefocus,r
-        
+          
                bind=SUPERSHIFT,H,movewindow,l
                bind=SUPERSHIFT,J,movewindow,d
                bind=SUPERSHIFT,K,movewindow,u
                bind=SUPERSHIFT,L,movewindow,r
-        
+          
                bind=SUPER,1,focusworkspaceoncurrentmonitor,1
                bind=SUPER,2,focusworkspaceoncurrentmonitor,2
                bind=SUPER,3,focusworkspaceoncurrentmonitor,3
@@ -221,12 +221,12 @@
                bind=SUPER,7,focusworkspaceoncurrentmonitor,7
                bind=SUPER,8,focusworkspaceoncurrentmonitor,8
                bind=SUPER,9,focusworkspaceoncurrentmonitor,9
-        
+          
                bind=SUPERCTRL,right,exec,hyprnome
                bind=SUPERCTRL,left,exec,hyprnome --previous
                bind=SUPERSHIFT,right,exec,hyprnome --move
                bind=SUPERSHIFT,left,exec,hyprnome --previous --move
-        
+          
                bind=SUPERSHIFT,1,movetoworkspace,1
                bind=SUPERSHIFT,2,movetoworkspace,2
                bind=SUPERSHIFT,3,movetoworkspace,3
@@ -236,7 +236,7 @@
                bind=SUPERSHIFT,7,movetoworkspace,7
                bind=SUPERSHIFT,8,movetoworkspace,8
                bind=SUPERSHIFT,9,movetoworkspace,9
-        
+          
                bind=SUPER,Z,exec,if hyprctl clients | grep scratch_term; then echo "scratch_term respawn not needed"; else alacritty --class scratch_term; fi
                bind=SUPER,Z,togglespecialworkspace,scratch_term
                bind=SUPER,F,exec,if hyprctl clients | grep scratch_ranger; then echo "scratch_ranger respawn not needed"; else kitty --class scratch_ranger -e ranger; fi
@@ -251,68 +251,68 @@
                bind=SUPER,D,togglespecialworkspace,scratch_element
                bind=SUPER,code:172,exec,togglespecialworkspace,scratch_pavucontrol
                bind=SUPER,code:172,exec,if hyprctl clients | grep pavucontrol; then echo "scratch_ranger respawn not needed"; else pavucontrol; fi
-        
+          
                $scratchpadsize = size 80% 85%
-        
+          
                $scratch_term = class:^(scratch_term)$
                windowrulev2 = float,$scratch_term
                windowrulev2 = $scratchpadsize,$scratch_term
                windowrulev2 = workspace special:scratch_term ,$scratch_term
                windowrulev2 = center,$scratch_term
-        
+          
                $float_term = class:^(float_term)$
                windowrulev2 = float,$float_term
                windowrulev2 = center,$float_term
-        
+          
                $scratch_ranger = class:^(scratch_ranger)$
                windowrulev2 = float,$scratch_ranger
                windowrulev2 = $scratchpadsize,$scratch_ranger
                windowrulev2 = workspace special:scratch_ranger silent,$scratch_ranger
                windowrulev2 = center,$scratch_ranger
-        
+          
                $scratch_numbat = class:^(scratch_numbat)$
                windowrulev2 = float,$scratch_numbat
                windowrulev2 = $scratchpadsize,$scratch_numbat
                windowrulev2 = workspace special:scratch_numbat silent,$scratch_numbat
                windowrulev2 = center,$scratch_numbat
-        
+          
                $scratch_btm = class:^(scratch_btm)$
                windowrulev2 = float,$scratch_btm
                windowrulev2 = $scratchpadsize,$scratch_btm
                windowrulev2 = workspace special:scratch_btm silent,$scratch_btm
                windowrulev2 = center,$scratch_btm
-        
+          
                windowrulev2 = float,class:^(Element)$
                windowrulev2 = size 85% 90%,class:^(Element)$
                windowrulev2 = workspace special:scratch_element silent,class:^(Element)$
                windowrulev2 = center,class:^(Element)$
-        
+          
                windowrulev2 = float,class:^(lollypop)$
                windowrulev2 = size 85% 90%,class:^(lollypop)$
                windowrulev2 = workspace special:scratch_music silent,class:^(lollypop)$
                windowrulev2 = center,class:^(lollypop)$
-        
+          
                $savetodisk = title:^(Save to Disk)$
                windowrulev2 = float,$savetodisk
                windowrulev2 = size 70% 75%,$savetodisk
                windowrulev2 = center,$savetodisk
-        
+          
                $pavucontrol = class:^(org.pulseaudio.pavucontrol)$
                windowrulev2 = float,$pavucontrol
                windowrulev2 = size 86% 40%,$pavucontrol
                windowrulev2 = move 50% 6%,$pavucontrol
                windowrulev2 = workspace special silent,$pavucontrol
                windowrulev2 = opacity 0.80,$pavucontrol
-        
+          
                $miniframe = title:\*Minibuf.*
                windowrulev2 = float,$miniframe
                windowrulev2 = size 64% 50%,$miniframe
                windowrulev2 = move 18% 25%,$miniframe
                windowrulev2 = animation popin 1 20,$miniframe
-        
+          
                windowrulev2 = float,class:^(pokefinder)$
                windowrulev2 = float,class:^(Waydroid)$
-        
+          
                windowrulev2 = float,title:^(Blender Render)$
                windowrulev2 = size 86% 85%,title:^(Blender Render)$
                windowrulev2 = center,title:^(Blender Render)$
@@ -322,9 +322,9 @@
                windowrulev2 = float,class:^(Gimp)
                windowrulev2 = float,class:^(Gimp)
                windowrulev2 = float,class:^(libresprite)$
-        
+          
                windowrulev2 = opacity 0.80,title:ORUI
-        
+          
                windowrulev2 = opacity 1.0,class:^(org.qutebrowser.qutebrowser),fullscreen:1
                windowrulev2 = opacity 0.85,class:^(Element)$
                windowrulev2 = opacity 0.85,class:^(lollypop)$
@@ -335,45 +335,45 @@
                windowrulev2 = opacity 0.85,class:^(org.keepassxc.KeePassXC)$
                windowrulev2 = opacity 0.85,class:^(org.gnome.Nautilus)$
                windowrulev2 = opacity 0.85,class:^(org.gnome.Nautilus)$
-        
+          
                windowrulev2 = opacity 0.85,initialTitle:^(Notes)$,initialClass:^(Brave-browser)$
-        
+          
                layerrule = blur,waybar
                layerrule = xray,waybar
                blurls = waybar
                layerrule = blur,gtk-layer-shell
                layerrule = xray,gtk-layer-shell
                blurls = gtk-layer-shell
-        
+          
                bind=SUPER,equal, exec, hyprctl keyword cursor:zoom_factor "$(hyprctl getoption cursor:zoom_factor | grep float | awk '{print $2 + 0.5}')"
                bind=SUPER,minus, exec, hyprctl keyword cursor:zoom_factor "$(hyprctl getoption cursor:zoom_factor | grep float | awk '{print $2 - 0.5}')"
-        
+          
                bind=SUPER,I,exec,networkmanager_dmenu
                bind=SUPER,P,exec,keepmenu
                bind=SUPERSHIFT,P,exec,hyprprofile-dmenu
                bind=SUPERCTRL,R,exec,phoenix refresh
-        
+          
                # 3 monitor setup
                monitor=eDP-1,1920x1080@300,900x1080,1
                monitor=HDMI-A-1,1920x1080,1920x0,1
                monitor=DP-1,1920x1080,0x0,1
-        
+          
                # hdmi tv
                #monitor=eDP-1,1920x1080,1920x0,1
                #monitor=HDMI-A-1,1920x1080,0x0,1
-        
+          
                # hdmi work projector
                #monitor=eDP-1,1920x1080,1920x0,1
                #monitor=HDMI-A-1,1920x1200,0x0,1
-        
+          
                xwayland {
                  force_zero_scaling = true
                }
-        
+          
                binds {
                  movefocus_cycles_fullscreen = false
                }
-        
+          
                input {
                  kb_layout = us
                  kb_options = caps:escape
@@ -383,7 +383,7 @@
                  follow_mouse = 2
                  float_switch_override_focus = 0
                }
-        
+          
                misc {
                  disable_hyprland_logo = true
                  mouse_move_enables_dpms = true
@@ -391,8 +391,8 @@
                  swallow_regex = (scratch_term)|(Alacritty)|(kitty)
                  font_family = ''
       + userSettings.font
-      + ''        
-        
+      + ''          
+          
         }
         decoration {
           rounding = 8
@@ -523,11 +523,11 @@
     '')
   ];
   home.file.".config/hypr/hyprlock.conf".text =
-    ''      
+    ''        
       background {
         monitor =
         path = screenshot
-      
+        
         # all these options are taken from hyprland, see https://wiki.hyprland.org/Configuring/Variables/#blur for explanations
         blur_passes = 4
         blur_size = 5
@@ -537,7 +537,7 @@
         vibrancy = 0.1696
         vibrancy_darkness = 0.0
       }
-      
+        
       # doesn't work yet
       image {
         monitor =
@@ -546,12 +546,12 @@
         rounding = -1 # negative values mean circle
         border_size = 0
         rotate = 0 # degrees, counter-clockwise
-      
+        
         position = 0, 200
         halign = center
         valign = center
       }
-      
+        
       input-field {
         monitor =
         size = 200, 50
@@ -607,12 +607,12 @@
             bothlock_color = -1 # when both locks are active. -1 means don't change outer color (same for above)
             invert_numlock = false # change color if numlock is off
             swap_font_color = false # see below
-      
+        
             position = 0, -20
             halign = center
             valign = center
           }
-      
+        
           label {
             monitor =
             text = Hello, Emmet
@@ -626,15 +626,15 @@
             font_size = 25
             font_family = ''
     + userSettings.font
-    + ''      
-      
+    + ''        
+        
         rotate = 0 # degrees, counter-clockwise
-      
+        
         position = 0, 160
         halign = center
         valign = center
       }
-      
+        
       label {
         monitor =
         text = $TIME
@@ -779,7 +779,7 @@
           "interval" = 1;
           "format" = "{:%I:%M:%S %p}";
           "timezone" = "America/Chicago";
-          "tooltip-format" = ''            
+          "tooltip-format" = ''              
             <big>{:%Y %B}</big>
             <tt><small>{calendar}</small></tt>'';
         };
@@ -787,7 +787,7 @@
           "interval" = 1;
           "format" = "{:%a %Y-%m-%d}";
           "timezone" = "America/Chicago";
-          "tooltip-format" = ''            
+          "tooltip-format" = ''              
             <big>{:%Y %B}</big>
             <tt><small>{calendar}</small></tt>'';
         };
@@ -907,16 +907,16 @@
       };
     };
     style =
-      ''        
+      ''          
         * {
             /* `otf-font-awesome` is required to be installed for icons */
             font-family: FontAwesome, ''
       + userSettings.font
       + ''        ;
-        
+          
                   font-size: 20px;
               }
-        
+          
               window#waybar {
                   background-color: rgba(''
       + config.lib.stylix.colors.base00-rgb-r
@@ -933,7 +933,7 @@
                   transition-property: background-color;
                   transition-duration: .2s;
               }
-        
+          
               tooltip {
                 color: #''
       + config.lib.stylix.colors.base07
@@ -953,7 +953,7 @@
       + config.lib.stylix.colors.base08
       + ''        ;
               }
-        
+          
               tooltip * {
                 color: #''
       + config.lib.stylix.colors.base07
@@ -967,31 +967,31 @@
       + ","
       + ''        0.0);
               }
-        
+          
               window > box {
                   border-radius: 8px;
                   opacity: 0.94;
               }
-        
+          
               window#waybar.hidden {
                   opacity: 0.2;
               }
-        
+          
               button {
                   border: none;
               }
-        
+          
               #custom-hyprprofile {
                   color: #''
       + config.lib.stylix.colors.base0D
       + ''        ;
               }
-        
+          
               /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
               button:hover {
                   background: inherit;
               }
-        
+          
               #workspaces button {
                   padding: 0px 6px;
                   background-color: transparent;
@@ -999,37 +999,37 @@
       + config.lib.stylix.colors.base04
       + ''        ;
               }
-        
+          
               #workspaces button:hover {
                   color: #''
       + config.lib.stylix.colors.base07
       + ''        ;
               }
-        
+          
               #workspaces button.active {
                   color: #''
       + config.lib.stylix.colors.base08
       + ''        ;
               }
-        
+          
               #workspaces button.focused {
                   color: #''
       + config.lib.stylix.colors.base0A
       + ''        ;
               }
-        
+          
               #workspaces button.visible {
                   color: #''
       + config.lib.stylix.colors.base05
       + ''        ;
               }
-        
+          
               #workspaces button.urgent {
                   color: #''
       + config.lib.stylix.colors.base09
       + ''        ;
               }
-        
+          
               #battery,
               #cpu,
               #memory,
@@ -1057,7 +1057,7 @@
                   border: none;
                   border-radius: 8px;
               }
-        
+          
               #custom-hyprprofileicon,
               #custom-quit,
               #custom-lock,
@@ -1069,7 +1069,7 @@
       + config.lib.stylix.colors.base04
       + ''        ;
               }
-        
+          
               #custom-hyprprofileicon:hover,
               #custom-quit:hover,
               #custom-lock:hover,
@@ -1080,44 +1080,44 @@
       + config.lib.stylix.colors.base07
       + ''        ;
               }
-        
+          
               #clock, #tray, #idle_inhibitor {
                   padding: 0 5px;
               }
-        
+          
               #window,
               #workspaces {
                   margin: 0 6px;
               }
-        
+          
               /* If workspaces is the leftmost module, omit left margin */
               .modules-left > widget:first-child > #workspaces {
                   margin-left: 0;
               }
-        
+          
               /* If workspaces is the rightmost module, omit right margin */
               .modules-right > widget:last-child > #workspaces {
                   margin-right: 0;
               }
-        
+          
               #clock {
                   color: #''
       + config.lib.stylix.colors.base0D
       + ''        ;
               }
-        
+          
               #battery {
                   color: #''
       + config.lib.stylix.colors.base0B
       + ''        ;
               }
-        
+          
               #battery.charging, #battery.plugged {
                   color: #''
       + config.lib.stylix.colors.base0C
       + ''        ;
               }
-        
+          
               @keyframes blink {
                   to {
                       background-color: #''
@@ -1128,7 +1128,7 @@
       + ''        ;
                   }
               }
-        
+          
               #battery.critical:not(.charging) {
                   background-color: #''
       + config.lib.stylix.colors.base08
@@ -1142,75 +1142,75 @@
                   animation-iteration-count: infinite;
                   animation-direction: alternate;
               }
-        
+          
               label:focus {
                   background-color: #''
       + config.lib.stylix.colors.base00
       + ''        ;
               }
-        
+          
               #cpu {
                   color: #''
       + config.lib.stylix.colors.base0D
       + ''        ;
               }
-        
+          
               #memory {
                   color: #''
       + config.lib.stylix.colors.base0E
       + ''        ;
               }
-        
+          
               #disk {
                   color: #''
       + config.lib.stylix.colors.base0F
       + ''        ;
               }
-        
+          
               #backlight {
                   color: #''
       + config.lib.stylix.colors.base0A
       + ''        ;
               }
-        
+          
               label.numlock {
                   color: #''
       + config.lib.stylix.colors.base04
       + ''        ;
               }
-        
+          
               label.numlock.locked {
                   color: #''
       + config.lib.stylix.colors.base0F
       + ''        ;
               }
-        
+          
               #pulseaudio {
                   color: #''
       + config.lib.stylix.colors.base0C
       + ''        ;
               }
-        
+          
               #pulseaudio.muted {
                   color: #''
       + config.lib.stylix.colors.base04
       + ''        ;
               }
-        
+          
               #tray > .passive {
                   -gtk-icon-effect: dim;
               }
-        
+          
               #tray > .needs-attention {
                   -gtk-icon-effect: highlight;
               }
-        
+          
               #idle_inhibitor {
                   color: #''
       + config.lib.stylix.colors.base04
       + ''        ;
               }
-        
+          
               #idle_inhibitor.activated {
                   color: #''
       + config.lib.stylix.colors.base0F

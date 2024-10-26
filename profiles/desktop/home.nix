@@ -7,6 +7,7 @@
   imports = [
     ../server/home.nix
     (./. + "../../../user/wm" + ("/" + userSettings.wm) + ".nix")
+    (./. + "../../../user/app/browser" + ("/" + userSettings.browser) + ".nix")
     ../../user/style/stylix.nix
   ];
   # ] ++ (if config.users.users.abayoumy.shell == pkgs.zsh then [ ./shells/zsh.nix ] else []);

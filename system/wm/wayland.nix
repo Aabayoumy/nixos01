@@ -48,7 +48,7 @@
       enable = true;
       wayland.enable = true;
       enableHidpi = true;
-      # theme = "chili";
+      theme = "chili";
     };
   };
 }
