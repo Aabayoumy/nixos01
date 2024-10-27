@@ -10,14 +10,14 @@
   imports = [
     ../app/terminal/kitty.nix
   ];
-  gtk.cursorTheme = {
-    package = pkgs.quintom-cursor-theme;
-    name =
-      if (config.stylix.polarity == "light")
-      then "Quintom_Ink"
-      else "Quintom_Snow";
-    size = 36;
-  };
+  # gtk.cursorTheme = {
+  #   package = pkgs.quintom-cursor-theme;
+  #   name =
+  #     if (config.stylix.polarity == "light")
+  #     then "Quintom_Ink"
+  #     else "Quintom_Snow";
+  #   size = 36;
+  # };
 
   wayland.windowManager.hyprland = {
     enable = true;
@@ -25,11 +25,11 @@
     extraConfig =
       ''          
         exec-once = dbus-update-activation-environment --systemd DISPLAY XAUTHORITY WAYLAND_DISPLAY XDG_SESSION_DESKTOP=Hyprland XDG_CURRENT_DESKTOP=Hyprland XDG_SESSION_TYPE=wayland
-        exec-once = hyprctl setcursor ''
-      + config.gtk.cursorTheme.name
-      + " "
-      + builtins.toString config.gtk.cursorTheme.size
-      + ''          
+      #   exec-once = hyprctl setcursor ''
+      # + config.gtk.cursorTheme.name
+      # + " "
+      # + builtins.toString config.gtk.cursorTheme.size
+      # + ''          
           
         env = XDG_CURRENT_DESKTOP,Hyprland
         env = XDG_SESSION_DESKTOP,Hyprland

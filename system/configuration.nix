@@ -17,7 +17,8 @@
 
   # Bootloader
   boot.loader.systemd-boot.enable = true;
-
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+  
   # enable qemu-guest-agentfor proxmox
   services.qemuGuest.enable = true;
   system.autoUpgrade.enable = true;
