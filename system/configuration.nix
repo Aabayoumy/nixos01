@@ -30,7 +30,7 @@
   ];
 
   # Ensure nix flakes are enabled
-  nix.package = pkgs.nixFlakes;
+  nix.package = pkgs.nixVersions.stable;
   nix.settings = {
     auto-optimise-store = true;
     experimental-features = ["nix-command" "flakes"];

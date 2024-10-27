@@ -11,6 +11,7 @@
   ];
   environment.systemPackages = with pkgs; [
     #obs-studio-plugins.wlrobs
+    vscode
     arc-kde-theme
     cava
     cmatrix

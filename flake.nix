@@ -43,7 +43,7 @@
       username = "abayoumy"; # username
       name = "Ahmed Bayoumy"; # name/identifier
       email = "abayoumy@outlook.com";
-      theme = "io";
+      theme = "dracula";
       browser = "librewolf";
       wm = "hyprland";
       wmType =
@@ -76,7 +76,13 @@
     pkgs-nwg-dock-kde = import inputs.nwg-dock-kde-pin-nixpkgs {
       system = systemSettings.system;
     };
-    pkgs = pkgs-stable;
+    pkgs = import inputs.nixpkgs {
+      system = systemSettings.system;
+      config = {
+        allowUnfree = true;
+        allowUnfreePredicate = _: true;
+      };
+    };
     lib = inputs.nixpkgs.lib;
     system = systemSettings.system;
   in {

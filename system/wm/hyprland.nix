@@ -14,6 +14,8 @@
   ];
 
   environment.systemPackages = with pkgs; [
+    waybar
+    rofi-wayland
     killall
     polkit_gnome
     papirus-icon-theme
