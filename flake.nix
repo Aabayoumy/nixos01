@@ -60,7 +60,7 @@
       username = "abayoumy"; # username
       name = "Ahmed Bayoumy"; # name/identifier
       email = "abayoumy@outlook.com";
-      theme = "nord";
+      theme = "eris";
       browser = "librewolf";
       wm = "hyprland";
       wmType =
