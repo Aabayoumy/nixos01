@@ -142,7 +142,6 @@
     enable = true;
     clean.enable = true;
     clean.extraArgs = "--keep-since 4d --keep 3";
-    flake = "/home/abayoumy/.dotfiles";
   };
 
   systemd.tmpfiles.rules = [
@@ -151,11 +150,11 @@
   ];
 
   fileSystems."/media/data" = {
-    device = "10.0.0.15:/media/data";
+    device = "10.0.0.15:/tank/data";
     fsType = "nfs";
   };
   # nfs services
   services.rpcbind.enable = true;
   services.nfs.server.enable = true;
-  system.stateVersion = "24.05"; # Did you read the comment?
+  system.stateVersion = "24.11"; # Did you read the comment?
 }
